@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { MyComponent } from './components/my-component';
-import { MyProvider } from './providers/my-provider';
+import { BaseService } from './providers/base.service';
 
 @NgModule({
   declarations: [
@@ -10,14 +10,15 @@ import { MyProvider } from './providers/my-provider';
   ],
   exports: [
     // export the component(s) that you want others to be able to use
-    MyComponent
+    MyComponent,
+    BaseService
   ]
 })
 export class MyModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: MyModule,
-      providers: [ MyProvider ]
+      providers: [ BaseService ]
     };
   }
 }
