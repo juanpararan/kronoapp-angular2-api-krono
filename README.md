@@ -44,3 +44,5 @@ import { MyModule } from 'ionic-module-template';
 })
 export class AppModule {}
 ```
+
+# angular2-api-krono
