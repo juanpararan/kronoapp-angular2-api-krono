@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { MyComponent } from './components/my-component';
-import { MyProvider } from './providers/my-provider';
+import { BaseService } from './providers/base.service';
 var MyModule = /** @class */ (function () {
     function MyModule() {
     }
     MyModule.forRoot = function () {
         return {
             ngModule: MyModule,
-            providers: [MyProvider]
+            providers: [BaseService]
         };
     };
     MyModule.decorators = [

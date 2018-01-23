@@ -10,8 +10,7 @@ import { BaseService } from './providers/base.service';
   ],
   exports: [
     // export the component(s) that you want others to be able to use
-    MyComponent,
-    BaseService
+    MyComponent
   ]
 })
 export class MyModule {
