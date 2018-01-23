@@ -4,6 +4,7 @@ import { LocalStorageService } from 'angular-2-local-storage';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
 import { JwtHelper } from "angular2-jwt";
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
