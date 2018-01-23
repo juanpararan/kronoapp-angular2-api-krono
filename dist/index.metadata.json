@@ -1,1 +1,1 @@
-[{"__symbolic":"module","version":3,"metadata":{},"exports":[{"from":"./my-module.module"},{"from":"./components/my-component"},{"from":"./providers/base.service"}]},{"__symbolic":"module","version":1,"metadata":{},"exports":[{"from":"./my-module.module"},{"from":"./components/my-component"},{"from":"./providers/base.service"}]}]
+{"__symbolic":"module","version":1,"metadata":{},"exports":[{"from":"./my-module.module"},{"from":"./components/my-component"},{"from":"./providers/base.service"}]}

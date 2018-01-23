@@ -14,8 +14,8 @@ export declare class BaseService {
     headerObject: any;
     jwtHelper: JwtHelper;
     constructor(http: Http, localStorage: LocalStorageService);
-    getBase(path2: any, options?: any): Observable<any>;
-    saveBase(path2: any, payload: any, options?: any): Observable<any>;
+    getBase(path2: any, options?: any): Observable<{}>;
+    saveBase(path2: any, payload: any, options?: any): Observable<{}>;
     handleError: (response: Response) => ErrorObservable;
     postRefreshToken(): BehaviorSubject<any>;
     headerLogin: () => any;

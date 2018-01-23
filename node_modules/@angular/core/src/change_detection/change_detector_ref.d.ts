@@ -25,9 +25,9 @@ export declare abstract class ChangeDetectorRef {
      * class Cmp {
      *   numberOfTicks = 0;
      *
-     *   constructor(private ref: ChangeDetectorRef) {
+     *   constructor(ref: ChangeDetectorRef) {
      *     setInterval(() => {
-     *       this.numberOfTicks++;
+     *       this.numberOfTicks ++
      *       // the following is required, otherwise the view will not be updated
      *       this.ref.markForCheck();
      *     }, 1000);
@@ -60,7 +60,7 @@ export declare abstract class ChangeDetectorRef {
      *
      * ### Example
      *
-     * The following example defines a component with a large list of readonly data.
+     * The following example defines a component with a large list of data.
      * Imagine the data changes constantly, many times per second. For performance reasons,
      * we want to check and update the list every five seconds. We can do that by detaching
      * the component's change detector and doing a local check every five seconds.
@@ -76,11 +76,11 @@ export declare abstract class ChangeDetectorRef {
      * @Component({
      *   selector: 'giant-list',
      *   template: `
-     *     <li *ngFor="let d of dataProvider.data">Data {{d}}</li>
+     *     <li *ngFor="let d of dataProvider.data">Data {{d}}</lig>
      *   `,
      * })
      * class GiantList {
-     *   constructor(private ref: ChangeDetectorRef, private dataProvider: DataProvider) {
+     *   constructor(private ref: ChangeDetectorRef, private dataProvider:DataProvider) {
      *     ref.detach();
      *     setInterval(() => {
      *       this.ref.detectChanges();
@@ -112,7 +112,7 @@ export declare abstract class ChangeDetectorRef {
      *
      * ### Example
      *
-     * The following example defines a component with a large list of readonly data.
+     * The following example defines a component with a large list of data.
      * Imagine, the data changes constantly, many times per second. For performance reasons,
      * we want to check and update the list every five seconds.
      *
@@ -161,14 +161,13 @@ export declare abstract class ChangeDetectorRef {
      *   template: 'Data: {{dataProvider.data}}'
      * })
      * class LiveData {
-     *   constructor(private ref: ChangeDetectorRef, private dataProvider: DataProvider) {}
+     *   constructor(private ref: ChangeDetectorRef, private dataProvider:DataProvider) {}
      *
      *   set live(value) {
-     *     if (value) {
+     *     if (value)
      *       this.ref.reattach();
-     *     } else {
+     *     else
      *       this.ref.detach();
-     *     }
      *   }
      * }
      *

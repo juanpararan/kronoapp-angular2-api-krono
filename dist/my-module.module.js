@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { MyComponent } from './components/my-component';
 import { BaseService } from './providers/base.service';
-var MyModule = /** @class */ (function () {
+export var MyModule = (function () {
     function MyModule() {
     }
     MyModule.forRoot = function () {
@@ -23,8 +23,7 @@ var MyModule = /** @class */ (function () {
                 },] },
     ];
     /** @nocollapse */
-    MyModule.ctorParameters = function () { return []; };
+    MyModule.ctorParameters = [];
     return MyModule;
 }());
-export { MyModule };
 //# sourceMappingURL=my-module.module.js.map

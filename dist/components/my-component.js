@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-var MyComponent = /** @class */ (function () {
+export var MyComponent = (function () {
     function MyComponent() {
     }
     MyComponent.decorators = [
@@ -9,8 +9,7 @@ var MyComponent = /** @class */ (function () {
                 },] },
     ];
     /** @nocollapse */
-    MyComponent.ctorParameters = function () { return []; };
+    MyComponent.ctorParameters = [];
     return MyComponent;
 }());
-export { MyComponent };
 //# sourceMappingURL=my-component.js.map

@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 import { JwtHelper } from "angular2-jwt";
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-var BaseService = /** @class */ (function () {
+export var BaseService = (function () {
     function BaseService(http, localStorage) {
         var _this = this;
         this.http = http;
@@ -155,11 +155,10 @@ var BaseService = /** @class */ (function () {
         { type: Injectable },
     ];
     /** @nocollapse */
-    BaseService.ctorParameters = function () { return [
+    BaseService.ctorParameters = [
         { type: Http, },
         { type: LocalStorageService, },
-    ]; };
+    ];
     return BaseService;
 }());
-export { BaseService };
 //# sourceMappingURL=base.service.js.map
