@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { MyComponent } from './components/my-component';
-import { BaseService } from './providers/base.service';
+import { BaseService } from './base.service';
 export var MyModule = (function () {
     function MyModule() {
     }

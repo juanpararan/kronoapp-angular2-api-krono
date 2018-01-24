@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { MyComponent } from './components/my-component';
-import { BaseService } from './providers/base.service';
+import { BaseService } from './base.service';
 
 @NgModule({
   declarations: [
