@@ -1,4 +1,4 @@
 export * from './my-module.module';
 export * from './components/my-component';
-export * from './base.service';
+export { BaseService } from './base.service';
 //# sourceMappingURL=index.js.map
