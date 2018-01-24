@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { MyComponent } from './components/my-component';
-import { BaseService } from './base.service';
+import { MyProvider } from './providers/my-provider';
 
 @NgModule({
   declarations: [
@@ -9,15 +9,15 @@ import { BaseService } from './base.service';
   ],
   exports: [
     MyComponent
-  ],
-  providers: [
-    BaseService
   ]
 })
 export class MyModule {
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: MyModule
+      ngModule: MyModule,
+      providers: [ 
+        MyProvider
+      ]
     };
   }
 }

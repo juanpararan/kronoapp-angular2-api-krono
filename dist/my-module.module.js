@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { MyComponent } from './components/my-component';
-import { BaseService } from './base.service';
+import { MyProvider } from './providers/my-provider';
 export var MyModule = (function () {
     function MyModule() {
     }
     MyModule.forRoot = function () {
         return {
-            ngModule: MyModule
+            ngModule: MyModule,
+            providers: [
+                MyProvider
+            ]
         };
     };
     MyModule.decorators = [
@@ -16,9 +19,6 @@ export var MyModule = (function () {
                     ],
                     exports: [
                         MyComponent
-                    ],
-                    providers: [
-                        BaseService
                     ]
                 },] },
     ];
