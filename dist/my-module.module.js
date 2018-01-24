@@ -7,17 +7,17 @@ export var MyModule = (function () {
     MyModule.forRoot = function () {
         return {
             ngModule: MyModule,
-            providers: [BaseService]
+            providers: [
+                BaseService
+            ]
         };
     };
     MyModule.decorators = [
         { type: NgModule, args: [{
                     declarations: [
-                        // declare all components that your module uses
                         MyComponent
                     ],
                     exports: [
-                        // export the component(s) that you want others to be able to use
                         MyComponent
                     ],
                     providers: [
