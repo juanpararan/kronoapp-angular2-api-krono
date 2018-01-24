@@ -5,5 +5,6 @@ export * from './providers/categories-provider';
 export * from './providers/subcategories-provider';
 export * from './providers/tags-provider';
 export * from './providers/products-provider';
+export * from './providers/coupons-provider';
 export * from './providers/store-provider';
 //# sourceMappingURL=index.js.map
