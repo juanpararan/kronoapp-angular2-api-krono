@@ -11,9 +11,9 @@ import { BaseService } from '../providers/my-provider';
 // Models
 import { StoreModel } from '../models/storeModel';
 import { ProductModel } from '../models/productModel';
-//import { ScheduleModel } from '../models/scheduleModel';
-//import { PaymentsModel } from '../models/paymentsModel';
-//import { DelivStoreModel } from '../models/delivStoreModel';
+import { ScheduleModel } from '../models/scheduleModel';
+import { PaymentsModel } from '../models/paymentsModel';
+import { DelivStoreModel } from '../models/delivStoreModel';
 import { BannerModel } from '../models/bannerModel';
 
 @Injectable()
@@ -23,14 +23,14 @@ export class StoreService extends BaseService {
     products: ProductModel[] = [];
 
     // Schedules array
-    //schedules: ScheduleModel[] = [];
-    //payments: PaymentsModel[] = [];
+    schedules: ScheduleModel[] = [];
+    payments: PaymentsModel[] = [];
 
     // Array to save object storeModel
     stores: StoreModel[] = [];
 
     // Forms of delivery array
-    //delivStore: DelivStoreModel[] = [];
+    delivStore: DelivStoreModel[] = [];
 
     // Banners array
     banners: BannerModel[] = [];
@@ -67,7 +67,7 @@ export class StoreService extends BaseService {
         this.getBase('chain/' + chainId + '/store/' + storeId 
                      + '/banners/active/', null)
             .subscribe(banners => {
-                for (var ban of <any>banners) {
+                for (var ban of <BannerModel[]>banners) {
                     var banner: BannerModel = new BannerModel(ban);
                     this.banners.push(banner);
                 }
@@ -80,7 +80,7 @@ export class StoreService extends BaseService {
 
     // getBestsellersProductsStore function: obtain information of bestsellers products in Botica store
     //                                       when user is not logged
-    /*getBestsellersProductsStore(chainId, storeId) {
+    getBestsellersProductsStore(chainId, storeId) {
 
         this.products = [];
 
@@ -90,10 +90,10 @@ export class StoreService extends BaseService {
         this.getBase('chain/' + chainId + '/store/' + storeId + 
                      '/bestsellers/', null)
             .subscribe(products => {
-                products.forEach(productsData => {
-                    var product: ProductModel = new ProductModel(productsData);
+                for (var prod of <ProductModel[]>products) {
+                    var product: ProductModel = new ProductModel(prod);
                     this.products.push(product);
-                });
+                }
                 observer.next(this.products);
             }, error => {
                 observer.next(error);
@@ -113,10 +113,10 @@ export class StoreService extends BaseService {
         this.getBase('application/' + applicationId + '/client/' + userId + 
                      '/store/' + storeId + '/bestsellers/', null)
             .subscribe(products => {
-                products.forEach(productsData => {
-                    var product: ProductModel = new ProductModel(productsData);
+                for (var prod of <ProductModel[]>products) {
+                    var product: ProductModel = new ProductModel(prod);
                     this.products.push(product);
-                });
+                }
                 observer.next(this.products);
             }, error => {
                 observer.next(error);
@@ -125,7 +125,7 @@ export class StoreService extends BaseService {
     }
 
     // getSchedule function: obtain information of schedule in Botica store
-    /*getSchedule(chainId, storeId) {
+    getSchedule(chainId, storeId) {
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
@@ -155,10 +155,10 @@ export class StoreService extends BaseService {
         this.getBase('chain/' + chainId + '/store/' + storeId + 
                      '/payments/', this.headerAuthentication())
             .subscribe(payments => {
-                payments.forEach(paymentData => {
-                    var payment: PaymentsModel = new PaymentsModel(paymentData);
+                for (var pay of <PaymentsModel[]>payments) {
+                    var payment: PaymentsModel = new PaymentsModel(pay);
                     this.payments.push(payment);
-                });
+                }
                 observer.next(this.payments);
             }, error => {
                 observer.next(error);
@@ -178,19 +178,19 @@ export class StoreService extends BaseService {
         this.getBase('chain/' + chainId + '/store/' + storeId + 
                      '/delivstores/', this.headerAuthentication())
             .subscribe(delivStore => {
-                delivStore.forEach(delivStoreData => {
-                    var deliv: DelivStoreModel = new DelivStoreModel(delivStoreData);
+                for (var deliv of <DelivStoreModel[]>delivStore) {
+                    var deliv: DelivStoreModel = new DelivStoreModel(deliv);
                     this.delivStore.push(deliv);
-                });
+                }
                 observer.next(this.delivStore);
             }, error => {
                 observer.next(error);
             });
         return observer; 
-    }*/
+    }
   
     // getStores function: obtain information of different Botica Junin stores       
-    /*getStores(chainId) {
+    getStores(chainId) {
 
         this.stores = [];
 
@@ -199,15 +199,15 @@ export class StoreService extends BaseService {
 
         this.getBase('chain/' + chainId + '/stores/active/', null)
             .subscribe(stores => {
-                stores.forEach(storeData => {
-                    var store: StoreModel = new StoreModel(storeData);
+                for (var store of <StoreModel[]>stores) {
+                    var store: StoreModel = new StoreModel(store);
                     this.stores.push(store);
-                })
+                }
                 observer.next(this.stores);
             }, error => {
                 observer.next(error);
             });
         return observer; 
-    }*/
+    }
     
 }

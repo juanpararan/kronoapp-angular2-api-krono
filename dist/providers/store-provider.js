@@ -10,6 +10,10 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { BaseService } from '../providers/my-provider';
 import { StoreModel } from '../models/storeModel';
+import { ProductModel } from '../models/productModel';
+import { ScheduleModel } from '../models/scheduleModel';
+import { PaymentsModel } from '../models/paymentsModel';
+import { DelivStoreModel } from '../models/delivStoreModel';
 import { BannerModel } from '../models/bannerModel';
 export var StoreService = (function (_super) {
     __extends(StoreService, _super);
@@ -20,12 +24,12 @@ export var StoreService = (function (_super) {
         // Products array
         this.products = [];
         // Schedules array
-        //schedules: ScheduleModel[] = [];
-        //payments: PaymentsModel[] = [];
+        this.schedules = [];
+        this.payments = [];
         // Array to save object storeModel
         this.stores = [];
         // Forms of delivery array
-        //delivStore: DelivStoreModel[] = [];
+        this.delivStore = [];
         // Banners array
         this.banners = [];
     }
@@ -65,134 +69,123 @@ export var StoreService = (function (_super) {
     };
     // getBestsellersProductsStore function: obtain information of bestsellers products in Botica store
     //                                       when user is not logged
-    /*getBestsellersProductsStore(chainId, storeId) {
-
+    StoreService.prototype.getBestsellersProductsStore = function (chainId, storeId) {
+        var _this = this;
         this.products = [];
-
         // Initial value to the observer is null
-        let observer = new BehaviorSubject(null);
-
+        var observer = new BehaviorSubject(null);
         this.getBase('chain/' + chainId + '/store/' + storeId +
-                     '/bestsellers/', null)
-            .subscribe(products => {
-                products.forEach(productsData => {
-                    var product: ProductModel = new ProductModel(productsData);
-                    this.products.push(product);
-                });
-                observer.next(this.products);
-            }, error => {
-                observer.next(error);
-            });
+            '/bestsellers/', null)
+            .subscribe(function (products) {
+            for (var _i = 0, _a = products; _i < _a.length; _i++) {
+                var prod = _a[_i];
+                var product = new ProductModel(prod);
+                _this.products.push(product);
+            }
+            observer.next(_this.products);
+        }, function (error) {
+            observer.next(error);
+        });
         return observer;
-    }
-
+    };
     // getBestsellersProductsUser function: obtain information of bestsellers products in Botica store
     //                                      from specific user
-    getBestsellersProductsUser(applicationId, userId, storeId) {
-
+    StoreService.prototype.getBestsellersProductsUser = function (applicationId, userId, storeId) {
+        var _this = this;
         this.products = [];
-
         // Initial value to the observer is null
-        let observer = new BehaviorSubject(null);
-
+        var observer = new BehaviorSubject(null);
         this.getBase('application/' + applicationId + '/client/' + userId +
-                     '/store/' + storeId + '/bestsellers/', null)
-            .subscribe(products => {
-                products.forEach(productsData => {
-                    var product: ProductModel = new ProductModel(productsData);
-                    this.products.push(product);
-                });
-                observer.next(this.products);
-            }, error => {
-                observer.next(error);
-            });
+            '/store/' + storeId + '/bestsellers/', null)
+            .subscribe(function (products) {
+            for (var _i = 0, _a = products; _i < _a.length; _i++) {
+                var prod = _a[_i];
+                var product = new ProductModel(prod);
+                _this.products.push(product);
+            }
+            observer.next(_this.products);
+        }, function (error) {
+            observer.next(error);
+        });
         return observer;
-    }
-
+    };
     // getSchedule function: obtain information of schedule in Botica store
-    /*getSchedule(chainId, storeId) {
-
+    StoreService.prototype.getSchedule = function (chainId, storeId) {
+        var _this = this;
         // Initial value to the observer is null
-        let observer = new BehaviorSubject(null);
-
+        var observer = new BehaviorSubject(null);
         this.schedules = [];
-
         this.getBase('chain/' + chainId + '/store/' + storeId +
-                     '/schedules/', this.headerAuthentication())
-            .subscribe(schedulesData => {
-                var schedule: ScheduleModel = new ScheduleModel(schedulesData);
-                this.schedules.push(schedule);
-                observer.next(this.schedules);
-            }, error => {
-                observer.next(error);
-            });
+            '/schedules/', this.headerAuthentication())
+            .subscribe(function (schedulesData) {
+            var schedule = new ScheduleModel(schedulesData);
+            _this.schedules.push(schedule);
+            observer.next(_this.schedules);
+        }, function (error) {
+            observer.next(error);
+        });
         return observer;
-    }
-
+    };
     // getSchedule function: obtain information of schedule in Botica store
-    getPayments(chainId, storeId) {
-
+    StoreService.prototype.getPayments = function (chainId, storeId) {
+        var _this = this;
         // Initial value to the observer is null
-        let observer = new BehaviorSubject(null);
-
+        var observer = new BehaviorSubject(null);
         this.payments = [];
-
         this.getBase('chain/' + chainId + '/store/' + storeId +
-                     '/payments/', this.headerAuthentication())
-            .subscribe(payments => {
-                payments.forEach(paymentData => {
-                    var payment: PaymentsModel = new PaymentsModel(paymentData);
-                    this.payments.push(payment);
-                });
-                observer.next(this.payments);
-            }, error => {
-                observer.next(error);
-            });
+            '/payments/', this.headerAuthentication())
+            .subscribe(function (payments) {
+            for (var _i = 0, _a = payments; _i < _a.length; _i++) {
+                var pay = _a[_i];
+                var payment = new PaymentsModel(pay);
+                _this.payments.push(payment);
+            }
+            observer.next(_this.payments);
+        }, function (error) {
+            observer.next(error);
+        });
         return observer;
-    }
-
+    };
     // getDelivStores function: obtain information of existent type of delivery in
     //                          Botica store
-    getDelivStores(chainId, storeId) {
-
+    StoreService.prototype.getDelivStores = function (chainId, storeId) {
+        var _this = this;
         this.delivStore = [];
-
         // Initial value to the observer is null
-        let observer = new BehaviorSubject(null);
-
+        var observer = new BehaviorSubject(null);
         this.getBase('chain/' + chainId + '/store/' + storeId +
-                     '/delivstores/', this.headerAuthentication())
-            .subscribe(delivStore => {
-                delivStore.forEach(delivStoreData => {
-                    var deliv: DelivStoreModel = new DelivStoreModel(delivStoreData);
-                    this.delivStore.push(deliv);
-                });
-                observer.next(this.delivStore);
-            }, error => {
-                observer.next(error);
-            });
+            '/delivstores/', this.headerAuthentication())
+            .subscribe(function (delivStore) {
+            for (var _i = 0, _a = delivStore; _i < _a.length; _i++) {
+                var deliv = _a[_i];
+                var deliv = new DelivStoreModel(deliv);
+                _this.delivStore.push(deliv);
+            }
+            observer.next(_this.delivStore);
+        }, function (error) {
+            observer.next(error);
+        });
         return observer;
-    }*/
+    };
     // getStores function: obtain information of different Botica Junin stores       
-    /*getStores(chainId) {
-
+    StoreService.prototype.getStores = function (chainId) {
+        var _this = this;
         this.stores = [];
-
         // Initial value to the observer is null
-        let observer = new BehaviorSubject(null);
-
+        var observer = new BehaviorSubject(null);
         this.getBase('chain/' + chainId + '/stores/active/', null)
-            .subscribe(stores => {
-                stores.forEach(storeData => {
-                    var store: StoreModel = new StoreModel(storeData);
-                    this.stores.push(store);
-                })
-                observer.next(this.stores);
-            }, error => {
-                observer.next(error);
-            });
+            .subscribe(function (stores) {
+            for (var _i = 0, _a = stores; _i < _a.length; _i++) {
+                var store = _a[_i];
+                var store = new StoreModel(store);
+                _this.stores.push(store);
+            }
+            observer.next(_this.stores);
+        }, function (error) {
+            observer.next(error);
+        });
         return observer;
-    }*/
+    };
     StoreService.decorators = [
         { type: Injectable },
     ];
