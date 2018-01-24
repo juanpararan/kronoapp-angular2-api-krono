@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { MyComponent } from './components/my-component';
 import { MyProvider } from './providers/my-provider';
 import { CategoriesProvider } from './providers/categories-provider';
+import { StoreProvider } from './providers/store-provider';
 export var MyModule = (function () {
     function MyModule() {
     }
@@ -10,7 +11,8 @@ export var MyModule = (function () {
             ngModule: MyModule,
             providers: [
                 MyProvider,
-                CategoriesProvider
+                CategoriesProvider,
+                StoreProvider
             ]
         };
     };

@@ -1,0 +1,31 @@
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+export declare class ProductModel {
+    loadedProduct: BehaviorSubject<any>;
+    id: number;
+    images: Array<any>;
+    datasheets: Array<any>;
+    units: any;
+    unit_default: any;
+    tags: Array<number>;
+    codebars: Array<string>;
+    description: string;
+    bestseller: number;
+    name: string;
+    has_prom: boolean;
+    has_prescription: boolean;
+    percentage: number;
+    color_prim: string;
+    color_sec: string;
+    is_active: boolean;
+    many_units: boolean;
+    storeId: number;
+    chainId: number;
+    subcategories: Array<number>;
+    position: number;
+    posid: string;
+    inventory: number;
+    rating: number;
+    suppliers: Array<number>;
+    constructor(attributes?: {});
+    attributes: {};
+}

@@ -1,8 +1,13 @@
 import { Observable } from 'rxjs';
 import { NgModule, ModuleWithProviders } from '@angular/core';
+
+// Components
 import { MyComponent } from './components/my-component';
+
+// Providers
 import { MyProvider } from './providers/my-provider';
 import { CategoriesProvider } from './providers/categories-provider';
+import { StoreProvider } from './providers/store-provider';
 
 @NgModule({
   declarations: [
@@ -18,7 +23,8 @@ export class MyModule {
       ngModule: MyModule,
       providers: [ 
         MyProvider,
-        CategoriesProvider
+        CategoriesProvider,
+        StoreProvider
       ]
     };
   }

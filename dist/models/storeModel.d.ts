@@ -1,0 +1,29 @@
+export declare class StoreModel {
+    id: number;
+    payments: Array<any>;
+    banners: Array<any>;
+    delivstores: Array<any>;
+    delivzones: Array<any>;
+    schedules: Array<any>;
+    specialdays: any;
+    lastorders: number;
+    name: string;
+    logo: string;
+    background_image: string;
+    description: string;
+    is_active: boolean;
+    minimun: number;
+    rating: number;
+    location_lat: number;
+    location_long: number;
+    minimum_response: string;
+    address_line_1: string;
+    address_line_2: string;
+    chainId: number;
+    cityId: number;
+    city_name: string;
+    email_logo: string;
+    foundations: Array<number>;
+    constructor(attributes?: {});
+    attributes: {};
+}
