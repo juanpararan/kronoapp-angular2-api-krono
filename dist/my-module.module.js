@@ -19,6 +19,9 @@ export var MyModule = (function () {
                     exports: [
                         // export the component(s) that you want others to be able to use
                         MyComponent
+                    ],
+                    providers: [
+                        BaseService
                     ]
                 },] },
     ];

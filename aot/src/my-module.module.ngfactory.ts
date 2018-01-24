@@ -7,11 +7,19 @@
 
 import * as import0 from '@angular/core/src/linker/ng_module_factory';
 import * as import1 from '../../src/my-module.module';
-import * as import2 from '@angular/core/src/di/injector';
+import * as import2 from '../../src/base.service';
+import * as import3 from '@angular/core/src/di/injector';
+import * as import4 from '@angular/http/src/http';
+import * as import5 from 'angular-2-local-storage/dist/local-storage.service';
 class MyModuleInjector extends import0.NgModuleInjector<import1.MyModule> {
   _MyModule_0:import1.MyModule;
-  constructor(parent:import2.Injector) {
+  __BaseService_1:import2.BaseService;
+  constructor(parent:import3.Injector) {
     super(parent,([] as any[]),([] as any[]));
+  }
+  get _BaseService_1():import2.BaseService {
+    if ((this.__BaseService_1 == null)) { (this.__BaseService_1 = new import2.BaseService(this.parent.get(import4.Http),this.parent.get(import5.LocalStorageService))); }
+    return this.__BaseService_1;
   }
   createInternal():import1.MyModule {
     this._MyModule_0 = new import1.MyModule();
@@ -19,6 +27,7 @@ class MyModuleInjector extends import0.NgModuleInjector<import1.MyModule> {
   }
   getInternal(token:any,notFoundResult:any):any {
     if ((token === import1.MyModule)) { return this._MyModule_0; }
+    if ((token === import2.BaseService)) { return this._BaseService_1; }
     return notFoundResult;
   }
   destroyInternal():void {
