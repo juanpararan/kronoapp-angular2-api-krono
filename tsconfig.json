@@ -1,14 +1,17 @@
 {
   "compilerOptions": {
+    "declaration": true,
+    "experimentalDecorators": true,
+    "lib": [
+      "dom", 
+      "es2015"
+    ],
     "module": "es2015",
-    "target": "es5",
     "moduleResolution": "node",
     "sourceMap": true,
+    "target": "es5",
     "inlineSources": true,
-    "declaration": true,
     "noImplicitAny": false,
-    "experimentalDecorators": true,
-    "lib": ["dom", "es2015"],
     "outDir": "dist"
   },
   "exclude": [

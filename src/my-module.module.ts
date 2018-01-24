@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { MyComponent } from './components/my-component';
 import { MyProvider } from './providers/my-provider';
+import { CategoriesProvider } from './providers/categories-provider';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ export class MyModule {
     return {
       ngModule: MyModule,
       providers: [ 
-        MyProvider
+        MyProvider,
+        CategoriesProvider
       ]
     };
   }
