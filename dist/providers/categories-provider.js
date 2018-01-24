@@ -33,7 +33,7 @@ export var CategoriesProvider = (function (_super) {
                 var category = new CategoryModel(cat);
                 _this.categories.push(category);
             }
-            observer.next(categories);
+            observer.next(_this.categories);
         }, function (error) {
             observer.next(error);
         });

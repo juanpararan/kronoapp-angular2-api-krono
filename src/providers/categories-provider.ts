@@ -35,7 +35,7 @@ export class CategoriesProvider extends MyProvider {
                     var category: CategoryModel = new CategoryModel(cat);
                     this.categories.push(category);
                 }
-                observer.next(categories);                                              
+                observer.next(this.categories);                                              
             }, error => {
                 observer.next(error);
             }); 
