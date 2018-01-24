@@ -5,6 +5,8 @@ import { CategoriesService } from './providers/categories-provider';
 import { SubcategoriesService } from './providers/subcategories-provider';
 import { StoreService } from './providers/store-provider';
 import { TagsService } from './providers/tags-provider';
+import { CouponsService } from './providers/coupons-provider';
+import { ProductsService } from './providers/products-provider';
 export var MyModule = (function () {
     function MyModule() {
     }
@@ -16,7 +18,9 @@ export var MyModule = (function () {
                 CategoriesService,
                 SubcategoriesService,
                 TagsService,
-                StoreService
+                StoreService,
+                CouponsService,
+                ProductsService
             ]
         };
     };
