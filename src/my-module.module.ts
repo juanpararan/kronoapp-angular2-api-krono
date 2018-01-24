@@ -17,10 +17,7 @@ import { BaseService } from './base.service';
 export class MyModule {
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: MyModule,
-      providers: [ 
-        BaseService 
-      ]
+      ngModule: MyModule
     };
   }
 }

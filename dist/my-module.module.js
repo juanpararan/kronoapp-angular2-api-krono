@@ -6,10 +6,7 @@ export var MyModule = (function () {
     }
     MyModule.forRoot = function () {
         return {
-            ngModule: MyModule,
-            providers: [
-                BaseService
-            ]
+            ngModule: MyModule
         };
     };
     MyModule.decorators = [
