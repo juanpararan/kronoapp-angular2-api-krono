@@ -6,7 +6,7 @@ import 'rxjs/Rx';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { JwtHelper } from "angular2-jwt";
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-export declare class MyProvider {
+export declare class BaseService {
     http: Http;
     localStorage: LocalStorageService;
     path: string;

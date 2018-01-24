@@ -5,13 +5,13 @@ import { LocalStorageService } from 'angular-2-local-storage';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 // Providers
-import { MyProvider } from './my-provider';
+import { BaseService } from './my-provider';
 
 // Models
 import { CategoryModel } from '../models/categoryModel';
 
 @Injectable()
-export class CategoriesProvider extends MyProvider {
+export class CategoriesService extends BaseService {
 
     // Categories array
     categories: CategoryModel[] = [];

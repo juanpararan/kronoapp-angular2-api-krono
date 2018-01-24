@@ -8,12 +8,12 @@ import 'rxjs/Rx';
 import { Http } from '@angular/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { MyProvider } from '../providers/my-provider';
+import { BaseService } from '../providers/my-provider';
 import { StoreModel } from '../models/storeModel';
 import { BannerModel } from '../models/bannerModel';
-export var StoreProvider = (function (_super) {
-    __extends(StoreProvider, _super);
-    function StoreProvider(http, localStorage) {
+export var StoreService = (function (_super) {
+    __extends(StoreService, _super);
+    function StoreService(http, localStorage) {
         _super.call(this, http, localStorage);
         this.http = http;
         this.localStorage = localStorage;
@@ -30,7 +30,7 @@ export var StoreProvider = (function (_super) {
         this.banners = [];
     }
     // getStore function: obtain information of store Botica Junin
-    StoreProvider.prototype.getStore = function (chainId, storeId) {
+    StoreService.prototype.getStore = function (chainId, storeId) {
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
         this.getBase('chain/' + chainId + '/store/' + storeId
@@ -44,7 +44,7 @@ export var StoreProvider = (function (_super) {
         return observer;
     };
     // getBanners function: obtain banners from specific store Botica Junin
-    StoreProvider.prototype.getBanners = function (chainId, storeId) {
+    StoreService.prototype.getBanners = function (chainId, storeId) {
         var _this = this;
         this.banners = [];
         // Initial value to the observer is null
@@ -193,14 +193,14 @@ export var StoreProvider = (function (_super) {
             });
         return observer;
     }*/
-    StoreProvider.decorators = [
+    StoreService.decorators = [
         { type: Injectable },
     ];
     /** @nocollapse */
-    StoreProvider.ctorParameters = [
+    StoreService.ctorParameters = [
         { type: Http, },
         { type: LocalStorageService, },
     ];
-    return StoreProvider;
-}(MyProvider));
+    return StoreService;
+}(BaseService));
 //# sourceMappingURL=store-provider.js.map

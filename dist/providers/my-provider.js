@@ -6,8 +6,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 import { JwtHelper } from "angular2-jwt";
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-export var MyProvider = (function () {
-    function MyProvider(http, localStorage) {
+export var BaseService = (function () {
+    function BaseService(http, localStorage) {
         var _this = this;
         this.http = http;
         this.localStorage = localStorage;
@@ -67,7 +67,7 @@ export var MyProvider = (function () {
         };
     }
     // getBase function: get information from server with base path url 
-    MyProvider.prototype.getBase = function (path2, options) {
+    BaseService.prototype.getBase = function (path2, options) {
         var _this = this;
         if (options === void 0) { options = null; }
         var d = new Date();
@@ -98,7 +98,7 @@ export var MyProvider = (function () {
         }
     };
     // saveBase function: post in server with base path url
-    MyProvider.prototype.saveBase = function (path2, payload, options) {
+    BaseService.prototype.saveBase = function (path2, payload, options) {
         var _this = this;
         if (options === void 0) { options = null; }
         var d = new Date();
@@ -129,7 +129,7 @@ export var MyProvider = (function () {
     };
     // postRefreshToken function: if token of user is expired, send post to 
     //                            request new token
-    MyProvider.prototype.postRefreshToken = function () {
+    BaseService.prototype.postRefreshToken = function () {
         var _this = this;
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
@@ -151,14 +151,14 @@ export var MyProvider = (function () {
         });
         return observer;
     };
-    MyProvider.decorators = [
+    BaseService.decorators = [
         { type: Injectable },
     ];
     /** @nocollapse */
-    MyProvider.ctorParameters = [
+    BaseService.ctorParameters = [
         { type: Http, },
         { type: LocalStorageService, },
     ];
-    return MyProvider;
+    return BaseService;
 }());
 //# sourceMappingURL=my-provider.js.map

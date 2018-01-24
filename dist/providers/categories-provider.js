@@ -8,11 +8,11 @@ import 'rxjs/Rx';
 import { Http } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { MyProvider } from './my-provider';
+import { BaseService } from './my-provider';
 import { CategoryModel } from '../models/categoryModel';
-export var CategoriesProvider = (function (_super) {
-    __extends(CategoriesProvider, _super);
-    function CategoriesProvider(http, localStorage) {
+export var CategoriesService = (function (_super) {
+    __extends(CategoriesService, _super);
+    function CategoriesService(http, localStorage) {
         _super.call(this, http, localStorage);
         this.http = http;
         this.localStorage = localStorage;
@@ -20,7 +20,7 @@ export var CategoriesProvider = (function (_super) {
         this.categories = [];
     }
     // getCategories function: obtain information of categories in Botica store
-    CategoriesProvider.prototype.getCategories = function (chainId, storeId) {
+    CategoriesService.prototype.getCategories = function (chainId, storeId) {
         var _this = this;
         this.categories = [];
         // Initial value to the observer is null
@@ -39,14 +39,14 @@ export var CategoriesProvider = (function (_super) {
         });
         return observer;
     };
-    CategoriesProvider.decorators = [
+    CategoriesService.decorators = [
         { type: Injectable },
     ];
     /** @nocollapse */
-    CategoriesProvider.ctorParameters = [
+    CategoriesService.ctorParameters = [
         { type: Http, },
         { type: LocalStorageService, },
     ];
-    return CategoriesProvider;
-}(MyProvider));
+    return CategoriesService;
+}(BaseService));
 //# sourceMappingURL=categories-provider.js.map

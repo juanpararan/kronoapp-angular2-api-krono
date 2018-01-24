@@ -2,11 +2,11 @@ import 'rxjs/Rx';
 import { Http } from '@angular/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { MyProvider } from '../providers/my-provider';
+import { BaseService } from '../providers/my-provider';
 import { StoreModel } from '../models/storeModel';
 import { ProductModel } from '../models/productModel';
 import { BannerModel } from '../models/bannerModel';
-export declare class StoreProvider extends MyProvider {
+export declare class StoreService extends BaseService {
     http: Http;
     localStorage: LocalStorageService;
     products: ProductModel[];

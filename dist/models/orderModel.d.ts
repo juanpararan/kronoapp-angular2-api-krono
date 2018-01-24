@@ -1,0 +1,30 @@
+export declare class OrderModel {
+    id: number;
+    items: Array<any>;
+    payments: Array<any>;
+    prescriptions: Array<any>;
+    client_name: string;
+    chainId: number;
+    coupons: Array<any>;
+    status: string;
+    date_start: string;
+    date_end: string;
+    comments: string;
+    address_line_1: string;
+    address_line_2: string;
+    deliv_order: string;
+    schedule_day: string;
+    schedule_hour_start: string;
+    schedule_hour_end: string;
+    order_number: number;
+    total: number;
+    cityId: number;
+    clientId: number;
+    zoneId: number;
+    storeId: number;
+    foundationId: number;
+    applicationId: number;
+    created: string;
+    constructor(attributes?: {});
+    attributes: {};
+}

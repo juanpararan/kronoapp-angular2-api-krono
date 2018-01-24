@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { LocalStorageService } from 'angular-2-local-storage';
 
 // Providers
-import { MyProvider } from '../providers/my-provider';
+import { BaseService } from '../providers/my-provider';
 //import { LoginService } from '../providers/loginService';
 
 // Models
@@ -17,7 +17,7 @@ import { ProductModel } from '../models/productModel';
 import { BannerModel } from '../models/bannerModel';
 
 @Injectable()
-export class StoreProvider extends MyProvider {
+export class StoreService extends BaseService {
 
     // Products array
     products: ProductModel[] = [];

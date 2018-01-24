@@ -10,7 +10,7 @@ import { JwtHelper } from "angular2-jwt";
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
-export class MyProvider {
+export class BaseService {
   
 	// Base path
     path: string = "https://api.kronogroup.co/";
