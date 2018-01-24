@@ -7,7 +7,9 @@ import { MyComponent } from './components/my-component';
 // Providers
 import { BaseService } from './providers/my-provider';
 import { CategoriesService } from './providers/categories-provider';
+import { SubcategoriesService } from './providers/subcategories-provider';
 import { StoreService } from './providers/store-provider';
+import { TagsService } from './providers/tags-provider';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ export class MyModule {
       providers: [ 
         BaseService,
         CategoriesService,
+        SubcategoriesService,
+        TagsService,
         StoreService
       ]
     };
