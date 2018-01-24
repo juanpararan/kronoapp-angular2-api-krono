@@ -31,7 +31,7 @@ export class CategoriesProvider extends MyProvider {
         this.getBase('chain/' + chainId + '/store/' + storeId + 
                      '/categories/active/', null)
             .subscribe(categories => {
-                for (var cat of <Array<any>>categories) {
+                for (var cat of <CategoryModel[]>categories) {
                     var category: CategoryModel = new CategoryModel(cat);
                     this.categories.push(category);
                 }
