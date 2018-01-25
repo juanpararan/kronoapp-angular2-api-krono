@@ -15,7 +15,6 @@ export var LoginService = (function (_super) {
         _super.call(this, http, localStorage);
         this.http = http;
         this.localStorage = localStorage;
-        this.userRegister = false;
     }
     // postLoginBotica function: post email and password to authenticate
     LoginService.prototype.postLoginBotica = function (payload) {
@@ -30,6 +29,7 @@ export var LoginService = (function (_super) {
         });
         return observer;
     };
+    // authFacebook void: post user to login in facebook with the backend
     LoginService.prototype.authFacebook = function (payload, observer) {
         var _this = this;
         this.saveBase('api-token-auth-client-facebook/', payload, this.headerLogin())
@@ -40,6 +40,7 @@ export var LoginService = (function (_super) {
             observer.next(error);
         });
     };
+    // authGoogle void: post user to login in google with the backend
     LoginService.prototype.authGoogle = function (payload, observer) {
         var _this = this;
         this.saveBase('api-token-auth-client-google/', payload, this.headerLogin())

@@ -10,13 +10,6 @@ import { BaseService } from './base-provider';
 @Injectable()
 export class LoginService extends BaseService {
 
-    userRegister: boolean = false;
-    user: any;
-    l: any;
-    name: any;
-    picture: any;
-    email: any;
-
     constructor(public http: Http, 
                 public localStorage: LocalStorageService) {
         
@@ -39,6 +32,7 @@ export class LoginService extends BaseService {
         return observer;        
     }
 
+    // authFacebook void: post user to login in facebook with the backend
     authFacebook(payload, observer) {
 
         this.saveBase('api-token-auth-client-facebook/', payload, this.headerLogin())
@@ -50,6 +44,7 @@ export class LoginService extends BaseService {
             });
     }
 
+    // authGoogle void: post user to login in google with the backend
     authGoogle(payload, observer) {
 
         this.saveBase('api-token-auth-client-google/', payload, this.headerLogin())

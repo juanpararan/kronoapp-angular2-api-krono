@@ -6,12 +6,6 @@ import { BaseService } from './base-provider';
 export declare class LoginService extends BaseService {
     http: Http;
     localStorage: LocalStorageService;
-    userRegister: boolean;
-    user: any;
-    l: any;
-    name: any;
-    picture: any;
-    email: any;
     constructor(http: Http, localStorage: LocalStorageService);
     postLoginBotica(payload: any): BehaviorSubject<any>;
     authFacebook(payload: any, observer: any): void;
