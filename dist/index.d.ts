@@ -11,3 +11,4 @@ export * from './providers/lists-provider';
 export * from './providers/orders-provider';
 export * from './providers/users-provider';
 export * from './providers/basket-provider';
+export * from './providers/login-provider';

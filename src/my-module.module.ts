@@ -15,7 +15,7 @@ import { ProductsService } from './providers/products-provider';
 import { UsersService } from './providers/users-provider';
 import { OrdersService } from './providers/orders-provider';
 import { ListsService } from './providers/lists-provider';
-//import { LoginService } from './providers/login-provider';
+import { LoginService } from './providers/login-provider';
 import { BasketService } from './providers/basket-provider';
 
 @NgModule({
@@ -41,7 +41,7 @@ export class MyModule {
 		        UsersService,
 		        OrdersService,
 		        ListsService,
-		        //LoginService,
+		        LoginService,
 		        BasketService
 	        ]
 	    };

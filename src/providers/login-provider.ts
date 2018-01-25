@@ -1,12 +1,8 @@
-/*import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Http } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
-
-// Plugins
-import { GooglePlus } from '@ionic-native/google-plus';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 // Providers
 import { BaseService } from './base-provider';
@@ -22,9 +18,7 @@ export class LoginService extends BaseService {
     email: any;
 
     constructor(public http: Http, 
-                public localStorage: LocalStorageService,
-                public googlePlus: GooglePlus, 
-                public facebook: Facebook) {
+                public localStorage: LocalStorageService) {
         
         super(http, localStorage);
     }
@@ -45,75 +39,26 @@ export class LoginService extends BaseService {
         return observer;        
     }
 
-    // postLoginFacebook function: post email and password to authenticate
-    postLoginFacebook(payload) {
+    authFacebook(payload, observer) {
 
-        // Initial value to the observer is null
-        let observer = new BehaviorSubject(null);
-
-        this.facebook.login(['public_profile', 'email'])
-            .then((res: FacebookLoginResponse) => {
-
-                this.facebook.api('me?fields=id,name,email,first_name,picture.width(720).height(720).as(picture_large)', []).then(profile => {
-
-                    // Obtain information user to show in register view in profile
-                    this.email = profile['email'];
-                    this.picture = profile['picture_large']['data']['url'];
-                    this.name = profile['first_name'];
-                });
-                
-                payload['access_token'] = res.authResponse.accessToken;
-                this.localStorage.set('tokenUser', res.authResponse.accessToken);
-
-                this.saveBase('api-token-auth-client-facebook/', payload, this.headerLogin())
-                    .subscribe(data => {
-                        this.localStorage.set('facebook', true);
-                        observer.next(data);
-                    }, error => {
-                        observer.next(error);
-                    });
-            })
-            .catch(error => {
-                console.log('Error logging into Facebook', error);
+        this.saveBase('api-token-auth-client-facebook/', payload, this.headerLogin())
+            .subscribe(data => {
+                this.localStorage.set('facebook', true);
+                observer.next(data);
+            }, error => {
                 observer.next(error);
             });
-
-        return observer;
     }
 
-    // postLoginGoogle function: post email and password to authenticate
-    postLoginGoogle(payload, googleWebKey) {
+    authGoogle(payload, observer) {
 
-        // Initial value to the observer is null
-        let observer = new BehaviorSubject(null);
-
-        // webClientId is WEB CLIENT ID, NOT ANDROID CLIENT ID (in developers.google)
-        this.googlePlus.login({
-            'webClientId': googleWebKey,
-            'offline': true
-        }).then(res => {
-            payload['id_token'] = res.idToken;
-            this.localStorage.set('tokenUser', res.idToken);
-
-            // Obtain information user to show in register view in profile
-            this.email = res.email;
-            this.picture = res.imageUrl;
-            this.name = res.displayName;
-
-            this.saveBase('api-token-auth-client-google/', payload, this.headerLogin())
-                .subscribe(data => {
-                    this.localStorage.set('google', true);
-                    observer.next(data);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-                }, error => {
-                    observer.next(error);
-                });
-        })
-        .catch(error => {
-            console.error(error);
-            observer.next(error);
-        });
-
-        return observer;
+        this.saveBase('api-token-auth-client-google/', payload, this.headerLogin())
+            .subscribe(data => {
+                this.localStorage.set('google', true);
+                observer.next(data);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+            }, error => {
+                observer.next(error);
+            });
     }
 
     // postLoginAfterRegisterGoogle function: after register user, login with google
@@ -152,25 +97,6 @@ export class LoginService extends BaseService {
         return observer;    
     }
 
-    // logoutFacebook void: logout from facebook successfully
-    logoutFacebook() {
-        this.facebook.logout().then(res => {
-            //alert(JSON.stringify(res));
-        }, error => {
-            //alert(error);
-        });
-    }
-
-    // disconnectGoogle void: logout and disconnect account from 
-    //                        google successfully
-    disconnectGoogle() {
-        this.googlePlus.disconnect().then(res => {
-            //alert(JSON.stringify(res));
-        }, error => {
-            //alert(error);
-        });
-    }
-
     // forgotPassword function: user forgot password and send to backend
     //                          to verify and send e-mail to recover password
     forgotPassword(payload) {
@@ -188,4 +114,4 @@ export class LoginService extends BaseService {
         return observer;
     }
 
-}*/
+}
