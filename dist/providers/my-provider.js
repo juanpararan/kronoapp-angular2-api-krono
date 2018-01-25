@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 import { JwtHelper } from "angular2-jwt";
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { _ERROR } from './errors';
 export var BaseService = (function () {
     function BaseService(http, localStorage) {
         var _this = this;
@@ -64,6 +65,25 @@ export var BaseService = (function () {
             });
             var options = new RequestOptions({ headers: headers });
             return options;
+        };
+        this.errors = function (response) {
+            var _error = new _ERROR().error;
+            console.log({ 'error': _error[response.json().error] });
+            if (response.json().error == 9 || response.json().error == 14) {
+                console.log('Token has expired');
+                _this.expired_token();
+            }
+            else if (response.status >= 401 && response.status <= 511) {
+                return Observable.throw({ 'error': response.status });
+            }
+            else {
+                if (response.json().error) {
+                    return Observable.throw({ 'error': _error[response.json().error] });
+                }
+                else {
+                    return Observable.throw(response.json());
+                }
+            }
         };
     }
     // getBase function: get information from server with base path url 
@@ -151,6 +171,48 @@ export var BaseService = (function () {
         });
         return observer;
     };
+    // ******************************** BASE SERVICE ADMIN *************************** //
+    BaseService.prototype.headerAuthenticationAdmin = function () {
+        var authToken = JSON.parse(localStorage.getItem('currentUser')).token;
+        var headers = new Headers({
+            'Authorization': 'JWT ' + authToken,
+            'Content-Type': 'application/json',
+        });
+        var options = new RequestOptions({ headers: headers });
+        return options;
+    };
+    BaseService.prototype.getAdmin = function (a, options) {
+        if (options === void 0) { options = null; }
+        //console.log(options);
+        return this.http.get(this.path + a, this.headerAuthenticationAdmin())
+            .map(function (res) { return res.json(); })
+            .catch(this.errors);
+    };
+    BaseService.prototype.saveAdmin = function (endpoint, payload, options) {
+        if (options === void 0) { options = null; }
+        console.log('payload --> ', payload);
+        return this.http.post(this.path + endpoint, payload, this.headerAuthenticationAdmin())
+            .map(function (res) { return res.json(); })
+            .catch(this.errors);
+    };
+    ;
+    BaseService.prototype.postAdmin = function (endpoint, payload) {
+        console.log('payload --> ', payload);
+        var body = JSON.stringify({ email: payload.email, password: payload.password });
+        var headers = new Headers({ 'Content-Type': 'application/json' });
+        var options = new RequestOptions({ headers: headers });
+        return this.http.post(this.path + endpoint, body, options)
+            .map(function (res) { return res.json(); })
+            .catch(this.errors);
+    };
+    ;
+    BaseService.prototype.expired_token = function () {
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('admin');
+        //this.router.navigateByUrl('/login');
+        window.location.replace("/login");
+    };
+    ;
     BaseService.decorators = [
         { type: Injectable },
     ];
