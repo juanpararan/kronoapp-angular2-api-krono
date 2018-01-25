@@ -20,10 +20,4 @@ export declare class BaseService {
     postRefreshToken(): BehaviorSubject<any>;
     headerLogin: () => any;
     headerAuthentication: () => RequestOptions;
-    headerAuthenticationAdmin(): RequestOptions;
-    getAdmin(a: any, options?: any): Observable<any>;
-    saveAdmin(endpoint: any, payload: any, options?: any): Observable<any>;
-    postAdmin(endpoint: any, payload: any): Observable<any>;
-    errors: (response: Response) => ErrorObservable;
-    expired_token(): void;
 }

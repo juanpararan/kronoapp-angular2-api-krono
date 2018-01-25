@@ -9,7 +9,7 @@ import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { JwtHelper } from "angular2-jwt";
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { _ERROR } from './errors';
+//import { _ERROR } from './errors';
 
 @Injectable()
 export class BaseService {
@@ -190,7 +190,7 @@ export class BaseService {
 
     // ******************************** BASE SERVICE ADMIN *************************** //
 
-    headerAuthenticationAdmin() {
+    /*headerAuthenticationAdmin() {
         let authToken = JSON.parse(localStorage.getItem('currentUser')).token;
         let headers = new Headers({
             'Authorization': 'JWT ' + authToken,
@@ -256,6 +256,6 @@ export class BaseService {
         localStorage.removeItem('admin');
         //this.router.navigateByUrl('/login');
         window.location.replace("/login");
-    };
+    };*/
 
 }
