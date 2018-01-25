@@ -15,32 +15,35 @@ import { ProductsService } from './providers/products-provider';
 import { UsersService } from './providers/users-provider';
 import { OrdersService } from './providers/orders-provider';
 import { ListsService } from './providers/lists-provider';
+//import { LoginService } from './providers/login-provider';
+import { BasketService } from './providers/basket-provider';
 
 @NgModule({
-  declarations: [
-    MyComponent
-  ],
-  exports: [
-    MyComponent
-  ]
+	declarations: [
+	    MyComponent
+	],
+	exports: [
+	    MyComponent
+	]
 })
 export class MyModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: MyModule,
-      providers: [ 
-        BaseService,
-        CategoriesService,
-        SubcategoriesService,
-        TagsService,
-        StoreService,
-        CouponsService,
-        ProductsService,
-        UsersService,
-        OrdersService,
-        ListsService
-      ]
-    };
-  }
+	static forRoot(): ModuleWithProviders {
+	    return {
+	        ngModule: MyModule,
+	        providers: [ 
+		        BaseService,
+		        CategoriesService,
+		        SubcategoriesService,
+		        TagsService,
+		        StoreService,
+		        CouponsService,
+		        ProductsService,
+		        UsersService,
+		        OrdersService,
+		        ListsService,
+		        //LoginService,
+		        BasketService
+	        ]
+	    };
+	}
 }
-

@@ -1,0 +1,41 @@
+import 'rxjs/Rx';
+import { Http } from '@angular/http';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { LocalStorageService } from 'angular-2-local-storage';
+import { BaseService } from './my-provider';
+export declare class BasketService extends BaseService {
+    http: Http;
+    localStorage: LocalStorageService;
+    basket: any;
+    itemId: any;
+    basketServerReady: boolean;
+    itemPost: any;
+    constructor(http: Http, localStorage: LocalStorageService);
+    addItem(product: any, quantity?: number): void;
+    _add(item: any): void;
+    removeItem(product: any, removeAll?: boolean): void;
+    _remove(item: any): void;
+    calculateTotal(): void;
+    count(): any;
+    find(productId: any): any;
+    resetBasket(): void;
+    getBasket(applicationId: any, userId: any, storeId: any): BehaviorSubject<any>;
+    postItemsDelete(payload: any): BehaviorSubject<any>;
+    postItem(item: any, itemId: any, typeTask: any): any;
+    createOrderItems(): {
+        'subtotal': any;
+        'total': any;
+        'items': any[];
+    };
+    basketFromBackend(data: any): void;
+    basketToBackend(): void;
+    addItemUser(item: any): void;
+    removeItemUser(item: any, itemId: any): void;
+    setItemQuantityUser(item: any, itemId: any): void;
+    containsProducts(): boolean;
+    calculateDiscount(item: any): number;
+    calculateDiscountOrderOrList(item: any): number;
+    calculateCoupon(item: any): number;
+    calculateCouponOrderOrList(item: any): number;
+    localBasket(): void;
+}

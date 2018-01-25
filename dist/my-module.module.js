@@ -10,6 +10,7 @@ import { ProductsService } from './providers/products-provider';
 import { UsersService } from './providers/users-provider';
 import { OrdersService } from './providers/orders-provider';
 import { ListsService } from './providers/lists-provider';
+import { BasketService } from './providers/basket-provider';
 export var MyModule = (function () {
     function MyModule() {
     }
@@ -26,7 +27,9 @@ export var MyModule = (function () {
                 ProductsService,
                 UsersService,
                 OrdersService,
-                ListsService
+                ListsService,
+                //LoginService,
+                BasketService
             ]
         };
     };
