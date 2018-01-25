@@ -2,7 +2,7 @@ export class ScheduleModel {
 
     // schedule attributes
     id: number = 0;
-    schedules: any = {};
+    schedules: Object = {};
 
     constructor(attributes: {} = null) {
         this.attributes = attributes;

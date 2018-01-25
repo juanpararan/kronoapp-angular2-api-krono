@@ -1,6 +1,6 @@
 export declare class UserModel {
     id: number;
-    cities: Array<any>;
+    cities: Array<Object>;
     name: string;
     email: string;
     document: number;
@@ -13,7 +13,7 @@ export declare class UserModel {
     phone: string;
     applicationId: number;
     firebase_uuid: string;
-    lists: Array<any>;
+    lists: Array<Object>;
     baskets: Array<number>;
     constructor(attributes?: {});
     attributes: {};

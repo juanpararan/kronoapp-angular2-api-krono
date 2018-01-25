@@ -2,7 +2,7 @@ export class ListModelSpecific {
 
     // List attributes
     id: number = 0;
-    items: Array<any> = [];
+    items: Array<Object> = [];
     chainId: number = 0;
     date: string = '';
     name: string = '';

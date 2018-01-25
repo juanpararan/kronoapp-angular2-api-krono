@@ -1,6 +1,6 @@
 export declare class ListModelSpecific {
     id: number;
-    items: Array<any>;
+    items: Array<Object>;
     chainId: number;
     date: string;
     name: string;

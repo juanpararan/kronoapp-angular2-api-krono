@@ -1,6 +1,6 @@
 export declare class ScheduleModel {
     id: number;
-    schedules: any;
+    schedules: Object;
     constructor(attributes?: {});
     attributes: {};
 }

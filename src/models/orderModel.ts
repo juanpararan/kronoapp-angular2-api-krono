@@ -2,12 +2,12 @@ export class OrderModel {
 
     // Orders attributes
     id: number = 0;
-    items: Array<any> = [];
-    payments: Array<any> = [];
-    prescriptions: Array<any> = [];
+    items: Array<Object> = [];
+    payments: Array<Object> = [];
+    prescriptions: Array<Object> = [];
     client_name: string = '';
     chainId: number = 0;
-    coupons: Array<any> = [];
+    coupons: Array<Object> = [];
     status: string = '';
     date_start: string = '';
     date_end: string = '';

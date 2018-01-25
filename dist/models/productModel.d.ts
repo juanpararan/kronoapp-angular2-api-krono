@@ -2,10 +2,10 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 export declare class ProductModel {
     loadedProduct: BehaviorSubject<any>;
     id: number;
-    images: Array<any>;
-    datasheets: Array<any>;
-    units: any;
-    unit_default: any;
+    images: Array<Object>;
+    datasheets: Array<Object>;
+    units: Object;
+    unit_default: Object;
     tags: Array<number>;
     codebars: Array<string>;
     description: string;

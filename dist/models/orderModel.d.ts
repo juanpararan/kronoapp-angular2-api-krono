@@ -1,11 +1,11 @@
 export declare class OrderModel {
     id: number;
-    items: Array<any>;
-    payments: Array<any>;
-    prescriptions: Array<any>;
+    items: Array<Object>;
+    payments: Array<Object>;
+    prescriptions: Array<Object>;
     client_name: string;
     chainId: number;
-    coupons: Array<any>;
+    coupons: Array<Object>;
     status: string;
     date_start: string;
     date_end: string;

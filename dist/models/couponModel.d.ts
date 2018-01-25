@@ -11,8 +11,8 @@ export declare class CouponModel {
     coupon_type: string;
     visible: boolean;
     storeId: number;
-    rules: Array<any>;
-    products: Array<any>;
+    rules: Array<Object>;
+    products: Array<Object>;
     constructor(attributes?: {});
     attributes: {};
 }

@@ -5,10 +5,10 @@ export class ProductModel {
     loadedProduct = new BehaviorSubject(null);
     // Products attributes
     id: number = 0;
-    images: Array<any> = [];
-    datasheets: Array<any> = [];
-    units: any = {};
-    unit_default: any = {};
+    images: Array<Object> = [];
+    datasheets: Array<Object> = [];
+    units: Object = {};
+    unit_default: Object = {};
     tags: Array<number> = [];
     codebars: Array<string> = [];
     description: string = '';

@@ -2,12 +2,12 @@ export class StoreModel {
 
     // Store attributes
     id: number = 0;
-    payments: Array<any> = [];
-    banners: Array<any> = [];
-    delivstores: Array<any> = [];
-    delivzones: Array<any> = [];
-    schedules: Array<any> = [];
-    specialdays: any = {};
+    payments: Array<Object> = [];
+    banners: Array<Object> = [];
+    delivstores: Array<Object> = [];
+    delivzones: Array<Object> = [];
+    schedules: Array<Object> = [];
+    specialdays: Object = {};
     lastorders: number = 0;
     name: string = '';
     logo: string = '';

@@ -1,11 +1,11 @@
 export declare class StoreModel {
     id: number;
-    payments: Array<any>;
-    banners: Array<any>;
-    delivstores: Array<any>;
-    delivzones: Array<any>;
-    schedules: Array<any>;
-    specialdays: any;
+    payments: Array<Object>;
+    banners: Array<Object>;
+    delivstores: Array<Object>;
+    delivzones: Array<Object>;
+    schedules: Array<Object>;
+    specialdays: Object;
     lastorders: number;
     name: string;
     logo: string;

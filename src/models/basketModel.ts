@@ -2,7 +2,7 @@ export class BasketModel {
 
     // Items attributes
     id: number = 0;
-    items: Array<any> = [];
+    items: Array<Object> = [];
     chainId: number = 0;
     date: string = '';
     storeId: number = 0;

@@ -13,8 +13,8 @@ export class CouponModel {
     coupon_type: string = '';
     visible: boolean = false;
     storeId: number = 0;
-    rules: Array<any> = [];
-    products: Array<any> = [];
+    rules: Array<Object> = [];
+    products: Array<Object> = [];
 
     constructor(attributes: {} = null) {
         this.attributes = attributes;

@@ -2,7 +2,7 @@ export class UserModel {
 
     // user attributes
     id: number = 0;
-    cities: Array<any> = [];
+    cities: Array<Object> = [];
     name: string = '';
     email: string = '';
     document: number = 0;
@@ -15,7 +15,7 @@ export class UserModel {
     phone: string = '';
     applicationId: number = 0;
     firebase_uuid: string = '';
-    lists: Array<any> = [];
+    lists: Array<Object> = [];
     baskets: Array<number> = [];
 
     constructor(attributes: {} = null) {

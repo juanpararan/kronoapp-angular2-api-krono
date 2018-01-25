@@ -1,6 +1,6 @@
 export declare class BasketModel {
     id: number;
-    items: Array<any>;
+    items: Array<Object>;
     chainId: number;
     date: string;
     storeId: number;
