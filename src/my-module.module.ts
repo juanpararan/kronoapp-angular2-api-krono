@@ -5,7 +5,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { MyComponent } from './components/my-component';
 
 // Providers
-import { BaseService } from './providers/my-provider';
+import { BaseService } from './providers/base-provider';
 import { CategoriesService } from './providers/categories-provider';
 import { SubcategoriesService } from './providers/subcategories-provider';
 import { StoreService } from './providers/store-provider';

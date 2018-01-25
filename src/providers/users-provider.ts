@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { LocalStorageService } from 'angular-2-local-storage';
 
 // Providers
-import { BaseService } from './my-provider';
+import { BaseService } from './base-provider';
 
 // Models
 import { UserModel } from '../models/userModel';

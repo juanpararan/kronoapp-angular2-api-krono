@@ -2,7 +2,7 @@ import 'rxjs/Rx';
 import { Http } from '@angular/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { BaseService } from './my-provider';
+import { BaseService } from './base-provider';
 import { ListModelGeneral } from '../models/listModelGeneral';
 import { ListModelSpecific } from '../models/listModelSpecific';
 export declare class ListsService extends BaseService {

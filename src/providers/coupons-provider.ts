@@ -5,7 +5,7 @@ import { LocalStorageService } from 'angular-2-local-storage';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 // Providers
-import { BaseService } from './my-provider';
+import { BaseService } from './base-provider';
 
 // Models
 import { CouponModel } from '../models/couponModel';

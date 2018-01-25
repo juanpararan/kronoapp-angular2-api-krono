@@ -8,7 +8,7 @@ import 'rxjs/Rx';
 import { Http } from '@angular/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { BaseService } from './my-provider';
+import { BaseService } from './base-provider';
 import { ProductModel } from '../models/productModel';
 export var ProductsService = (function (_super) {
     __extends(ProductsService, _super);

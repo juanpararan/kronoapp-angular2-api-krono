@@ -223,4 +223,4 @@ export var BaseService = (function () {
     ];
     return BaseService;
 }());
-//# sourceMappingURL=my-provider.js.map
+//# sourceMappingURL=base-provider.js.map

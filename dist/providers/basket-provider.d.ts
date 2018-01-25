@@ -2,7 +2,7 @@ import 'rxjs/Rx';
 import { Http } from '@angular/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { BaseService } from './my-provider';
+import { BaseService } from './base-provider';
 export declare class BasketService extends BaseService {
     http: Http;
     localStorage: LocalStorageService;

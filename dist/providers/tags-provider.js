@@ -8,7 +8,7 @@ import 'rxjs/Rx';
 import { Http } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { BaseService } from './my-provider';
+import { BaseService } from './base-provider';
 import { TagModel } from '../models/tagModel';
 export var TagsService = (function (_super) {
     __extends(TagsService, _super);

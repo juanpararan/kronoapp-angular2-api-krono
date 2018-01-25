@@ -9,7 +9,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 // Providers
-import { BaseService } from './my-provider';
+import { BaseService } from './base-provider';
 
 @Injectable()
 export class LoginService extends BaseService {
