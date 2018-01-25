@@ -12,6 +12,9 @@ import { StoreService } from './providers/store-provider';
 import { TagsService } from './providers/tags-provider';
 import { CouponsService } from './providers/coupons-provider';
 import { ProductsService } from './providers/products-provider';
+import { UsersService } from './providers/users-provider';
+import { OrdersService } from './providers/orders-provider';
+import { ListsService } from './providers/lists-provider';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ export class MyModule {
         TagsService,
         StoreService,
         CouponsService,
-        ProductsService
+        ProductsService,
+        UsersService,
+        OrdersService,
+        ListsService
       ]
     };
   }
