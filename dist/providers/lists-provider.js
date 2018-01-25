@@ -17,7 +17,6 @@ export var ListsService = (function (_super) {
         _super.call(this, http, localStorage);
         this.http = http;
         this.localStorage = localStorage;
-        this.applicationId = 1;
         this.lists = [];
         this.list = [];
     }

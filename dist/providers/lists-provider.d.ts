@@ -8,7 +8,6 @@ import { ListModelSpecific } from '../models/listModelSpecific';
 export declare class ListsService extends BaseService {
     http: Http;
     localStorage: LocalStorageService;
-    applicationId: number;
     lists: ListModelGeneral[];
     list: ListModelSpecific[];
     constructor(http: Http, localStorage: LocalStorageService);

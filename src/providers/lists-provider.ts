@@ -14,8 +14,6 @@ import { ListModelSpecific } from '../models/listModelSpecific';
 @Injectable()
 export class ListsService extends BaseService {
 
-    applicationId: number = 1;
-
     lists: ListModelGeneral[] = [];
     list: ListModelSpecific[] = [];
 
