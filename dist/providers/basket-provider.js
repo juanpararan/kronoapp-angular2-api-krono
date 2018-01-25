@@ -16,8 +16,11 @@ export var BasketService = (function (_super) {
         _super.call(this, http, localStorage);
         this.http = http;
         this.localStorage = localStorage;
+        // Basket local
+        this.basket = {};
         // Basket user
         this.basketServerReady = false;
+        this.itemPost = {};
         this.basket = {
             items: [],
             subtotal: 0,
@@ -31,7 +34,7 @@ export var BasketService = (function (_super) {
     BasketService.prototype.addItem = function (product, quantity) {
         var _this = this;
         if (quantity === void 0) { quantity = 1; }
-        var basketItem = this.basket.indexedItems[product.id];
+        var basketItem = this.basket['indexedItems'][product.id];
         if (!basketItem) {
             basketItem = product;
             basketItem.quantity = 0;
@@ -60,8 +63,8 @@ export var BasketService = (function (_super) {
     };
     // add function: add item in local basket or post to backend
     BasketService.prototype._add = function (item) {
-        this.basket.items.unshift(item);
-        this.basket.indexedItems[item.id] = item;
+        this.basket['items'].unshift(item);
+        this.basket['indexedItems'][item.id] = item;
         if (this.basketServerReady) {
             this.addItemUser(item);
         }
@@ -70,7 +73,7 @@ export var BasketService = (function (_super) {
     BasketService.prototype.removeItem = function (product, removeAll) {
         var _this = this;
         if (removeAll === void 0) { removeAll = false; }
-        var basketItem = this.basket.indexedItems[product.id];
+        var basketItem = this.basket['indexedItems'][product.id];
         if (basketItem) {
             basketItem.quantity--;
             if (this.basketServerReady) {
@@ -99,9 +102,9 @@ export var BasketService = (function (_super) {
     // remove function: remove item from basket local or in backend
     BasketService.prototype._remove = function (item) {
         var _this = this;
-        var index = this.basket.items.indexOf(item);
-        this.basket.items.splice(index, 1);
-        delete this.basket.indexedItems[item.id];
+        var index = this.basket['items'].indexOf(item);
+        this.basket['items'].splice(index, 1);
+        delete this.basket['indexedItems'][item.id];
         if (this.basketServerReady) {
             if (!item.itemId) {
                 item.loadedProduct.subscribe(function (data) {
@@ -123,7 +126,7 @@ export var BasketService = (function (_super) {
         var total = 0;
         var subtotal = 0;
         var count = 0;
-        this.basket.items.forEach(function (item) {
+        this.basket['items'].forEach(function (item) {
             subtotal += item.unit_default.price * item.quantity;
             if (item.has_coupon) {
                 total += _this.calculateCoupon(item) * item.quantity;
@@ -133,9 +136,9 @@ export var BasketService = (function (_super) {
             }
             count += item.quantity;
         });
-        this.basket.subtotal = subtotal;
-        this.basket.total = total;
-        this.basket.count = count;
+        this.basket['subtotal'] = subtotal;
+        this.basket['total'] = total;
+        this.basket['count'] = count;
         if (!this.localStorage.get('userId')) {
             this.localStorage.set('basket', this.basket);
         }
@@ -143,12 +146,12 @@ export var BasketService = (function (_super) {
     // count function: is the number of total items in the basket
     //                 to show in header component on the basket icon
     BasketService.prototype.count = function () {
-        return this.basket.count;
+        return this.basket['count'];
     };
     // find function: find product in the basket to know if show quantity in
     //                home or products view
     BasketService.prototype.find = function (productId) {
-        var item = this.basket.indexedItems[productId];
+        var item = this.basket['indexedItems'][productId];
         if (item) {
             return item;
         }
@@ -159,11 +162,11 @@ export var BasketService = (function (_super) {
     // resetBasket function: reset basket when order is done or when
     //                       change city
     BasketService.prototype.resetBasket = function () {
-        this.basket.items = [];
-        this.basket.total = 0;
-        this.basket.subtotal = 0;
-        this.basket.count = 0;
-        this.basket.indexedItems = {};
+        this.basket['items'] = [];
+        this.basket['total'] = 0;
+        this.basket['subtotal'] = 0;
+        this.basket['count'] = 0;
+        this.basket['indexedItems'] = {};
     };
     // getBasket function: obtain information of basket
     //                     of specific client in Botica store
@@ -283,13 +286,13 @@ export var BasketService = (function (_super) {
     // createOrderItems function: create items to pass to the final order
     BasketService.prototype.createOrderItems = function () {
         var items = [];
-        for (var _i = 0, _a = this.basket.items; _i < _a.length; _i++) {
+        for (var _i = 0, _a = this.basket['items']; _i < _a.length; _i++) {
             var item = _a[_i];
             items.push(item);
         }
         return {
-            'subtotal': this.basket.subtotal,
-            'total': this.basket.total,
+            'subtotal': this.basket['subtotal'],
+            'total': this.basket['total'],
             'items': items
         };
     };
@@ -311,7 +314,7 @@ export var BasketService = (function (_super) {
     // basketToBackend void: Take the items in the local basket and
     //                       put in the backend basket of the user 
     BasketService.prototype.basketToBackend = function () {
-        for (var _i = 0, _a = this.basket.items; _i < _a.length; _i++) {
+        for (var _i = 0, _a = this.basket['items']; _i < _a.length; _i++) {
             var item = _a[_i];
             item.loadedProduct = new BehaviorSubject(null);
             this.postItem(item, null, 'add');
@@ -332,7 +335,7 @@ export var BasketService = (function (_super) {
     };
     // containsProducts function: the basket already contains products 
     BasketService.prototype.containsProducts = function () {
-        return this.basket.items.length != 0;
+        return this.basket['items'].length != 0;
     };
     // calculateDiscount function: with the price of product and percentage promotion calculates the new price
     BasketService.prototype.calculateDiscount = function (item) {

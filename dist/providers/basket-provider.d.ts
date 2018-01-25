@@ -6,10 +6,10 @@ import { BaseService } from './base-provider';
 export declare class BasketService extends BaseService {
     http: Http;
     localStorage: LocalStorageService;
-    basket: any;
-    itemId: any;
+    basket: Object;
+    itemId: number;
     basketServerReady: boolean;
-    itemPost: any;
+    itemPost: Object;
     constructor(http: Http, localStorage: LocalStorageService);
     addItem(product: any, quantity?: number): void;
     _add(item: any): void;

@@ -14,12 +14,12 @@ import { BasketModel } from '../models/basketModel';
 export class BasketService extends BaseService {
 
     // Basket local
-    basket: any;
-    itemId: any;
+    basket: Object = {};
+    itemId: number;
 
     // Basket user
     basketServerReady: boolean = false;
-    itemPost: any;
+    itemPost: Object = {};
 
     constructor(public http: Http, public localStorage: LocalStorageService) {
                     
@@ -37,7 +37,7 @@ export class BasketService extends BaseService {
     // addItem function: add item inside basket in Botica store
     addItem(product, quantity=1) {
 
-        let basketItem = this.basket.indexedItems[product.id];
+        let basketItem = this.basket['indexedItems'][product.id];
 
         if (!basketItem) {
             basketItem = product;
@@ -79,8 +79,8 @@ export class BasketService extends BaseService {
     // add function: add item in local basket or post to backend
     _add(item) {
 
-        this.basket.items.unshift(item);
-        this.basket.indexedItems[item.id] = item;
+        this.basket['items'].unshift(item);
+        this.basket['indexedItems'][item.id] = item;
 
         if (this.basketServerReady) {
             this.addItemUser(item);
@@ -90,7 +90,7 @@ export class BasketService extends BaseService {
     // removeItem function: remove item inside basket in Botica store
     removeItem(product, removeAll=false) {
 
-        let basketItem = this.basket.indexedItems[product.id];
+        let basketItem = this.basket['indexedItems'][product.id];
         
         if (basketItem) {
             basketItem.quantity--;
@@ -128,9 +128,9 @@ export class BasketService extends BaseService {
 
     // remove function: remove item from basket local or in backend
     _remove(item) {
-        var index = this.basket.items.indexOf(item);
-        this.basket.items.splice(index, 1);
-        delete this.basket.indexedItems[item.id];
+        var index = this.basket['items'].indexOf(item);
+        this.basket['items'].splice(index, 1);
+        delete this.basket['indexedItems'][item.id];
 
         if (this.basketServerReady) {
 
@@ -156,7 +156,7 @@ export class BasketService extends BaseService {
         let total = 0;
         let subtotal = 0;
         let count = 0;
-        this.basket.items.forEach(item => {
+        this.basket['items'].forEach(item => {
             subtotal += item.unit_default.price * item.quantity;
             if (item.has_coupon) {
                 total += this.calculateCoupon(item) * item.quantity;
@@ -166,9 +166,9 @@ export class BasketService extends BaseService {
             }
             count += item.quantity;               
         })
-        this.basket.subtotal = subtotal;
-        this.basket.total = total;
-        this.basket.count = count;
+        this.basket['subtotal'] = subtotal;
+        this.basket['total'] = total;
+        this.basket['count'] = count;
 
         if (!this.localStorage.get('userId')) {
             this.localStorage.set('basket', this.basket);
@@ -179,13 +179,13 @@ export class BasketService extends BaseService {
     // count function: is the number of total items in the basket
     //                 to show in header component on the basket icon
     count() {
-        return this.basket.count; 
+        return this.basket['count']; 
     }
 
     // find function: find product in the basket to know if show quantity in
     //                home or products view
     find(productId) {
-        let item = this.basket.indexedItems[productId];
+        let item = this.basket['indexedItems'][productId];
         if (item) {
             return item;
         }
@@ -198,11 +198,11 @@ export class BasketService extends BaseService {
     // resetBasket function: reset basket when order is done or when
     //                       change city
     resetBasket() {
-        this.basket.items = [];
-        this.basket.total = 0;
-        this.basket.subtotal = 0;
-        this.basket.count = 0;
-        this.basket.indexedItems = {};
+        this.basket['items'] = [];
+        this.basket['total'] = 0;
+        this.basket['subtotal'] = 0;
+        this.basket['count'] = 0;
+        this.basket['indexedItems'] = {};
     }
 
 
@@ -346,13 +346,13 @@ export class BasketService extends BaseService {
     createOrderItems() {
         let items = [];
 
-        for (var item of this.basket.items) {
+        for (var item of this.basket['items']) {
             items.push(item);
         }
 
         return {
-            'subtotal': this.basket.subtotal,
-            'total': this.basket.total,
+            'subtotal': this.basket['subtotal'],
+            'total': this.basket['total'],
             'items' : items
         }
     }
@@ -378,7 +378,7 @@ export class BasketService extends BaseService {
     //                       put in the backend basket of the user 
     basketToBackend() {
 
-        for (var item of this.basket.items) {
+        for (var item of this.basket['items']) {
             item.loadedProduct = new BehaviorSubject(null);
             this.postItem(item, null, 'add');
         }
@@ -403,7 +403,7 @@ export class BasketService extends BaseService {
 
     // containsProducts function: the basket already contains products 
     containsProducts() {
-        return this.basket.items.length != 0;
+        return this.basket['items'].length != 0;
     }
     
     // calculateDiscount function: with the price of product and percentage promotion calculates the new price
