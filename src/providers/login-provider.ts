@@ -22,7 +22,7 @@ export class LoginService extends BaseService {
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
-        console.log("PAYLOAD USER LOGIN BOTICA", payload);
+        console.log("PAYLOAD USER LOGIN", payload);
         this.saveBase('api-token-auth-client/', payload, this.headerLogin())
             .subscribe(data => {
                 observer.next(data);
@@ -59,8 +59,6 @@ export class LoginService extends BaseService {
     // postLoginAfterRegisterGoogle function: after register user, login with google
     postloginAfterRegisterGoogle(payload) {
 
-        payload['id_token'] = this.localStorage.get('tokenUser');
-
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
@@ -76,8 +74,6 @@ export class LoginService extends BaseService {
 
     // postLoginAfterRegisterFacebook function: after register user, login with facebook
     postLoginAfterRegisterFacebook(payload) {
-
-        payload['access_token'] = this.localStorage.get('tokenUser');
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
