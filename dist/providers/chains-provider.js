@@ -34,8 +34,8 @@ export var ChainsService = (function (_super) {
                 _this.chains.push(chain);
                 _this.chainsStorage[chain.id] = chain;
             }
-            observer.next(_this.chains);
             _this.localStorage.set('chains', _this.chainsStorage);
+            observer.next(_this.chains);
         }, function (error) {
             observer.next(error);
         });

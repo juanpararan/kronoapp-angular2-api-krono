@@ -38,8 +38,8 @@ export class ChainsService extends BaseService {
                         this.chains.push(chain);
                         this.chainsStorage[chain.id] = chain;
                     }
+                    this.localStorage.set('chains', this.chainsStorage);
                     observer.next(this.chains);
-                    this.localStorage.set('chains', this.chainsStorage)
                 }, error => {
                     observer.next(error);
                 });
