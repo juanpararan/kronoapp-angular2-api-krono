@@ -9,8 +9,6 @@ import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { JwtHelper } from "angular2-jwt";
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-//import { _ERROR } from './errors';
-
 @Injectable()
 export class BaseService {
   
@@ -107,12 +105,6 @@ export class BaseService {
         // If error is created in backend
         else {
 
-            // Signature has expired. Refresh token
-            /*if (response.json().error == 9) {
-
-
-            }*/
-
             // Refresh has expired. Logout
             if (response.json().error == 14) {
                 console.log("ME DIO ERROR 14 CERRARE SESION")
@@ -187,75 +179,5 @@ export class BaseService {
 
         return options;
     }
-
-    // ******************************** BASE SERVICE ADMIN *************************** //
-
-    /*headerAuthenticationAdmin() {
-        let authToken = JSON.parse(localStorage.getItem('currentUser')).token;
-        let headers = new Headers({
-            'Authorization': 'JWT ' + authToken,
-            'Content-Type': 'application/json',
-        });
-
-        let options = new RequestOptions({ headers: headers})
-
-        return options;
-    }
-
-    getAdmin(a, options=null) {
-        //console.log(options);
-        return this.http.get(this.path + a, this.headerAuthenticationAdmin())
-            .map(res => res.json())
-            .catch(this.errors);
-    }
-
-    saveAdmin(endpoint, payload, options=null) {
-        console.log('payload --> ',payload);
-        return this.http.post(this.path + endpoint, payload, this.headerAuthenticationAdmin())
-            .map(res => res.json())
-            .catch(this.errors);
-    };
-
-    postAdmin(endpoint, payload) {
-        console.log('payload --> ',payload);
-        let body = JSON.stringify({email: payload.email, password: payload.password})
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(this.path + endpoint, body, options)
-            .map(res => res.json())
-            .catch(this.errors);
-    };   
-
-    errors = (response: Response) => {
-        let _error = new _ERROR().error;
-
-        console.log({'error': _error[response.json().error]});
-        if(response.json().error == 9 || response.json().error == 14) {
-            console.log('Token has expired');
-            this.expired_token();
-        }
-
-        // If error is SERVER ERROR or CLIENT ERROR
-        else if (response.status >= 401 && response.status <= 511) {
-            return Observable.throw({'error': response.status});
-        }
-
-        // If error is created in backend
-        else {
-            if(response.json().error) {
-                return Observable.throw({'error': _error[response.json().error]});
-            } else {
-                return Observable.throw(response.json());
-            }
-            //return Observable.throw(response.json() || 'El servidor ha tenido un error.');
-        }  
-    }; 
-
-    expired_token() {
-        localStorage.removeItem('currentUser');
-        localStorage.removeItem('admin');
-        //this.router.navigateByUrl('/login');
-        window.location.replace("/login");
-    };*/
 
 }
