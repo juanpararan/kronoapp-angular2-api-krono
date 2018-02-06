@@ -18,7 +18,6 @@ export var ListsService = (function (_super) {
         this.http = http;
         this.localStorage = localStorage;
         this.lists = [];
-        this.list = [];
     }
     // postListBasket function: create, or delete list in
     //                    specific client
@@ -69,7 +68,6 @@ export var ListsService = (function (_super) {
     };
     // getList function: obtain specific list of specific user
     ListsService.prototype.getList = function (applicationId, userId, storeId, listId) {
-        this.list = [];
         var observer = new BehaviorSubject(null);
         this.getBase('application/' + applicationId + '/client/' + userId
             + '/store/' + storeId + '/list/' + listId + '/', this.headerAuthentication())

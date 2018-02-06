@@ -17,6 +17,9 @@ import { OrdersService } from './providers/orders-provider';
 import { ListsService } from './providers/lists-provider';
 import { LoginService } from './providers/login-provider';
 import { BasketService } from './providers/basket-provider';
+import { ChainsService } from './providers/chains-provider';
+import { CitiesService } from './providers/cities-provider';
+import { FeedbackService } from './providers/feedback-provider';
 
 @NgModule({
 	declarations: [
@@ -42,7 +45,10 @@ export class MyModule {
 		        OrdersService,
 		        ListsService,
 		        LoginService,
-		        BasketService
+		        BasketService,
+		        ChainsService,
+		        CitiesService,
+		        FeedbackService
 	        ]
 	    };
 	}

@@ -15,7 +15,6 @@ import { ListModelSpecific } from '../models/listModelSpecific';
 export class ListsService extends BaseService {
 
     lists: ListModelGeneral[] = [];
-    list: ListModelSpecific[] = [];
 
     constructor(public http: Http, public localStorage: LocalStorageService) {
         super(http, localStorage);
@@ -83,8 +82,6 @@ export class ListsService extends BaseService {
 
     // getList function: obtain specific list of specific user
     getList(applicationId, userId, storeId, listId) {
-
-        this.list = [];
 
         let observer = new BehaviorSubject(null);
 

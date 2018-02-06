@@ -12,4 +12,7 @@ export * from './providers/orders-provider';
 export * from './providers/users-provider';
 export * from './providers/basket-provider';
 export * from './providers/login-provider';
+export * from './providers/chains-provider';
+export * from './providers/cities-provider';
+export * from './providers/feedback-provider';
 //# sourceMappingURL=index.js.map

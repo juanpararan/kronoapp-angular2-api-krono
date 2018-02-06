@@ -6,7 +6,6 @@ import { LocalStorageService } from 'angular-2-local-storage';
 
 // Providers
 import { BaseService } from './base-provider';
-//import { LoginService } from '../providers/loginService';
 
 // Models
 import { StoreModel } from '../models/storeModel';
@@ -15,6 +14,7 @@ import { ScheduleModel } from '../models/scheduleModel';
 import { PaymentsModel } from '../models/paymentsModel';
 import { DelivStoreModel } from '../models/delivStoreModel';
 import { BannerModel } from '../models/bannerModel';
+import { DelivZoneModel } from '../models/delivZoneModel';
 
 @Injectable()
 export class StoreService extends BaseService {
@@ -31,6 +31,7 @@ export class StoreService extends BaseService {
 
     // Forms of delivery array
     delivStore: DelivStoreModel[] = [];
+    delivZone: DelivZoneModel[] = [];
 
     // Banners array
     banners: BannerModel[] = [];
@@ -204,6 +205,28 @@ export class StoreService extends BaseService {
                     this.stores.push(store);
                 }
                 observer.next(this.stores);
+            }, error => {
+                observer.next(error);
+            });
+        return observer; 
+    }
+
+    // getDelivZones function: obtain information of different Delivery Krono Zones
+    getDelivZones(chainId, storeId){
+        
+        this.delivZone = [];
+        
+        // Initial value to the observer is null
+        let observer = new BehaviorSubject(null);
+
+        this.getBase('chain/' + chainId + '/store/' + storeId + 
+                        '/delivzones/', this.headerAuthentication())
+            .subscribe(delivZones => {
+                for (var deliv of <DelivZoneModel[]>delivZones) {
+                    var deliv: DelivZoneModel = new DelivZoneModel(deliv);
+                    this.delivZone.push(deliv);
+                }
+                observer.next(this.delivZone);
             }, error => {
                 observer.next(error);
             });

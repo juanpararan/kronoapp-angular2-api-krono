@@ -15,6 +15,7 @@ import { ScheduleModel } from '../models/scheduleModel';
 import { PaymentsModel } from '../models/paymentsModel';
 import { DelivStoreModel } from '../models/delivStoreModel';
 import { BannerModel } from '../models/bannerModel';
+import { DelivZoneModel } from '../models/delivZoneModel';
 export var StoreService = (function (_super) {
     __extends(StoreService, _super);
     function StoreService(http, localStorage) {
@@ -30,6 +31,7 @@ export var StoreService = (function (_super) {
         this.stores = [];
         // Forms of delivery array
         this.delivStore = [];
+        this.delivZone = [];
         // Banners array
         this.banners = [];
     }
@@ -181,6 +183,26 @@ export var StoreService = (function (_super) {
                 _this.stores.push(store);
             }
             observer.next(_this.stores);
+        }, function (error) {
+            observer.next(error);
+        });
+        return observer;
+    };
+    // getDelivZones function: obtain information of different Delivery Krono Zones
+    StoreService.prototype.getDelivZones = function (chainId, storeId) {
+        var _this = this;
+        this.delivZone = [];
+        // Initial value to the observer is null
+        var observer = new BehaviorSubject(null);
+        this.getBase('chain/' + chainId + '/store/' + storeId +
+            '/delivzones/', this.headerAuthentication())
+            .subscribe(function (delivZones) {
+            for (var _i = 0, _a = delivZones; _i < _a.length; _i++) {
+                var deliv = _a[_i];
+                var deliv = new DelivZoneModel(deliv);
+                _this.delivZone.push(deliv);
+            }
+            observer.next(_this.delivZone);
         }, function (error) {
             observer.next(error);
         });

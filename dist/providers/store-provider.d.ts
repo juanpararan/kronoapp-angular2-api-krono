@@ -9,6 +9,7 @@ import { ScheduleModel } from '../models/scheduleModel';
 import { PaymentsModel } from '../models/paymentsModel';
 import { DelivStoreModel } from '../models/delivStoreModel';
 import { BannerModel } from '../models/bannerModel';
+import { DelivZoneModel } from '../models/delivZoneModel';
 export declare class StoreService extends BaseService {
     http: Http;
     localStorage: LocalStorageService;
@@ -17,6 +18,7 @@ export declare class StoreService extends BaseService {
     payments: PaymentsModel[];
     stores: StoreModel[];
     delivStore: DelivStoreModel[];
+    delivZone: DelivZoneModel[];
     banners: BannerModel[];
     constructor(http: Http, localStorage: LocalStorageService);
     getStore(chainId: any, storeId: any): BehaviorSubject<any>;
@@ -27,4 +29,5 @@ export declare class StoreService extends BaseService {
     getPayments(chainId: any, storeId: any): BehaviorSubject<any>;
     getDelivStores(chainId: any, storeId: any): BehaviorSubject<any>;
     getStores(chainId: any): BehaviorSubject<any>;
+    getDelivZones(chainId: any, storeId: any): BehaviorSubject<any>;
 }
