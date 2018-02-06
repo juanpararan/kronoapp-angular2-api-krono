@@ -73,6 +73,25 @@ export var OrdersService = (function (_super) {
         });
         return observer;
     };
+    // getOrders function: obtain information of orders of specific client
+    //                     in Botica store
+    OrdersService.prototype.getOrdersKrono = function (applicationId, userId) {
+        var _this = this;
+        this.orders = [];
+        var observer = new BehaviorSubject(null);
+        this.getBase('application/' + applicationId + '/client/' + userId + '/orders/', this.headerAuthentication())
+            .subscribe(function (orders) {
+            for (var _i = 0, _a = orders; _i < _a.length; _i++) {
+                var ord = _a[_i];
+                var order = new OrderModel(ord);
+                _this.orders.push(order);
+            }
+            observer.next(_this.orders);
+        }, function (error) {
+            observer.next(error);
+        });
+        return observer;
+    };
     // getOrder function: obtain information of specific client order
     OrdersService.prototype.getOrder = function (applicationId, userId, storeId, orderId) {
         var observer = new BehaviorSubject(null);

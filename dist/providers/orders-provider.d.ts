@@ -14,5 +14,6 @@ export declare class OrdersService extends BaseService {
     postOrder(payload: any): BehaviorSubject<any>;
     getPrescription(applicationId: any, userId: any): BehaviorSubject<any>;
     getOrders(applicationId: any, userId: any, storeId: any): BehaviorSubject<any>;
+    getOrdersKrono(applicationId: any, userId: any): BehaviorSubject<any>;
     getOrder(applicationId: any, userId: any, storeId: any, orderId: any): BehaviorSubject<any>;
 }

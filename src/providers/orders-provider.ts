@@ -86,6 +86,28 @@ export class OrdersService extends BaseService {
         return observer;
     }
 
+    // getOrders function: obtain information of orders of specific client
+    //                     in Botica store
+    getOrdersKrono(applicationId, userId) {
+
+        this.orders = [];
+
+        let observer = new BehaviorSubject(null);
+
+        this.getBase('application/' + applicationId + '/client/' + userId + '/orders/', this.headerAuthentication())
+            .subscribe(orders => {
+                for (var ord of <OrderModel[]>orders) {
+                    var order: OrderModel = new OrderModel(ord);
+                    this.orders.push(order);
+                }
+                observer.next(this.orders);                                              
+            }, error => {
+                observer.next(error);
+            }); 
+        return observer;
+    }
+
+
     // getOrder function: obtain information of specific client order
     getOrder(applicationId, userId, storeId, orderId) {
 
