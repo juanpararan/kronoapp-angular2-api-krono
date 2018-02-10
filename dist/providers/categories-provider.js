@@ -39,6 +39,20 @@ export var CategoriesService = (function (_super) {
         });
         return observer;
     };
+    // getCategories function: obtain information of category in Krono Market
+    CategoriesService.prototype.getCategory = function (chainId, storeId, categoryId) {
+        // Initial value to the observer is null
+        var observer = new BehaviorSubject(null);
+        this.getBase('chain/' + chainId + '/store/' + storeId +
+            '/category/' + categoryId, null)
+            .subscribe(function (categoryData) {
+            var category = new CategoryModel(categoryData);
+            observer.next(category);
+        }, function (error) {
+            observer.next(error);
+        });
+        return observer;
+    };
     CategoriesService.decorators = [
         { type: Injectable },
     ];

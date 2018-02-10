@@ -42,4 +42,21 @@ export class CategoriesService extends BaseService {
         return observer;
     }
 
+    // getCategories function: obtain information of category in Krono Market
+    getCategory(chainId, storeId, categoryId) {
+
+        // Initial value to the observer is null
+        let observer = new BehaviorSubject(null);
+
+        this.getBase('chain/' + chainId + '/store/' + storeId + 
+                     '/category/' + categoryId, null)
+            .subscribe(categoryData => {
+                let category: CategoryModel = new CategoryModel(categoryData);
+                observer.next(category);
+            }, error => {
+                observer.next(error);
+            });
+        return observer;
+    }
+
 }
