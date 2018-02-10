@@ -42,4 +42,22 @@ export class SubcategoriesService extends BaseService {
         return observer;
     }
     
+    // getSubcategory function: obtain information of subcategory in Krono Market
+    getSubcategory(chainId, storeId, categoryId, subcategoryId) {
+
+        // Initial value to the observer is null
+        let observer = new BehaviorSubject(null);
+
+        this.getBase('chain/' + chainId + '/store/' + storeId + 
+                     '/category/' + categoryId + '/subcategory/' +
+                     subcategoryId, null)
+            .subscribe(subcategoryData => {
+                let subcategory: SubcategoryModel = new SubcategoryModel(subcategoryData);
+                observer.next(subcategory);
+            }, error => {
+                observer.next(error);
+            });
+        return observer;
+    }
+    
 }

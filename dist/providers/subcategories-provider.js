@@ -39,6 +39,21 @@ export var SubcategoriesService = (function (_super) {
         });
         return observer;
     };
+    // getSubcategory function: obtain information of subcategory in Krono Market
+    SubcategoriesService.prototype.getSubcategory = function (chainId, storeId, categoryId, subcategoryId) {
+        // Initial value to the observer is null
+        var observer = new BehaviorSubject(null);
+        this.getBase('chain/' + chainId + '/store/' + storeId +
+            '/category/' + categoryId + '/subcategory/' +
+            subcategoryId, null)
+            .subscribe(function (subcategoryData) {
+            var subcategory = new SubcategoryModel(subcategoryData);
+            observer.next(subcategory);
+        }, function (error) {
+            observer.next(error);
+        });
+        return observer;
+    };
     SubcategoriesService.decorators = [
         { type: Injectable },
     ];
