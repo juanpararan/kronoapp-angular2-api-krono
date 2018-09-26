@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fabiocasmar/angular2-api-krono.git"
+    "url": "git+ssh://git@github.com:Guilleanto/angular2-api-kronoapps.git"
   },
   "keywords": [],
   "author": "",

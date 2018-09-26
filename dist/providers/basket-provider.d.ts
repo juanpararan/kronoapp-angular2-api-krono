@@ -8,7 +8,8 @@ export declare class BasketService extends BaseService {
     localStorage: LocalStorageService;
     itemPost: any;
     constructor(http: Http, localStorage: LocalStorageService);
-    getBasket(applicationId: any, userId: any, storeId: any): BehaviorSubject<any>;
-    postItemsDelete(payload: any): BehaviorSubject<any>;
-    postItem(item: any, itemId: any, typeTask: any): any;
+    getBasket(baseUrl: any, applicationId: any, userId: any, storeId: any): BehaviorSubject<any>;
+    validVersion(baseUrl: any, applicationId: any): BehaviorSubject<any>;
+    postItemsDelete(baseUrl: any, payload: any): BehaviorSubject<any>;
+    postItem(baseUrl: any, item: any, itemId: any, typeTask: any): any;
 }

@@ -23,11 +23,11 @@ export var OrdersService = (function (_super) {
     }
     // postOrder function: post order inside orders of specific
     //                     client in Botica store
-    OrdersService.prototype.postOrder = function (payload) {
+    OrdersService.prototype.postOrder = function (baseUrl, payload) {
         payload['task'] = 'add';
         var observer = new BehaviorSubject(null);
         console.log("payload de lo que hare post con order", payload);
-        this.saveBase('chain/store/client/basket/payment/prescription/orders/', payload, this.headerAuthentication())
+        this.saveBase(baseUrl, 'chain/store/client/basket/payment/prescription/orders/', payload, this.headerAuthentication())
             .subscribe(function (data) {
             observer.next(data);
         }, function (error) {
@@ -36,11 +36,11 @@ export var OrdersService = (function (_super) {
         return observer;
     };
     // getPrescription function: obtain information of user last prescription in Botica store
-    OrdersService.prototype.getPrescription = function (applicationId, userId) {
+    OrdersService.prototype.getPrescription = function (baseUrl, applicationId, userId) {
         var _this = this;
         this.prescriptions = [];
         var observer = new BehaviorSubject(null);
-        this.getBase('application/' + applicationId + '/client/' + userId + '/prescriptions/last/', this.headerAuthentication())
+        this.getBase(baseUrl, 'application/' + applicationId + '/client/' + userId + '/prescriptions/last/', this.headerAuthentication())
             .subscribe(function (prescriptions) {
             for (var _i = 0, _a = prescriptions; _i < _a.length; _i++) {
                 var presc = _a[_i];
@@ -55,11 +55,11 @@ export var OrdersService = (function (_super) {
     };
     // getOrders function: obtain information of orders of specific client
     //                     in Botica store
-    OrdersService.prototype.getOrders = function (applicationId, userId, storeId) {
+    OrdersService.prototype.getOrders = function (baseUrl, applicationId, userId, storeId) {
         var _this = this;
         this.orders = [];
         var observer = new BehaviorSubject(null);
-        this.getBase('application/' + applicationId + '/client/' + userId + '/store/' +
+        this.getBase(baseUrl, 'application/' + applicationId + '/client/' + userId + '/store/' +
             storeId + '/orders/', this.headerAuthentication())
             .subscribe(function (orders) {
             for (var _i = 0, _a = orders; _i < _a.length; _i++) {
@@ -75,11 +75,11 @@ export var OrdersService = (function (_super) {
     };
     // getOrders function: obtain information of orders of specific client
     //                     in Botica store
-    OrdersService.prototype.getOrdersKrono = function (applicationId, userId) {
+    OrdersService.prototype.getOrdersKrono = function (baseUrl, applicationId, userId) {
         var _this = this;
         this.orders = [];
         var observer = new BehaviorSubject(null);
-        this.getBase('application/' + applicationId + '/client/' + userId + '/orders/', this.headerAuthentication())
+        this.getBase(baseUrl, 'application/' + applicationId + '/client/' + userId + '/orders/', this.headerAuthentication())
             .subscribe(function (orders) {
             for (var _i = 0, _a = orders; _i < _a.length; _i++) {
                 var ord = _a[_i];
@@ -93,9 +93,9 @@ export var OrdersService = (function (_super) {
         return observer;
     };
     // getOrder function: obtain information of specific client order
-    OrdersService.prototype.getOrder = function (applicationId, userId, storeId, orderId) {
+    OrdersService.prototype.getOrder = function (baseUrl, applicationId, userId, storeId, orderId) {
         var observer = new BehaviorSubject(null);
-        this.getBase('application/' + applicationId + '/client/' + userId + '/store/' +
+        this.getBase(baseUrl, 'application/' + applicationId + '/client/' + userId + '/store/' +
             storeId + '/order/' + orderId + '/', this.headerAuthentication())
             .subscribe(function (order) {
             for (var _i = 0, _a = order['items']; _i < _a.length; _i++) {

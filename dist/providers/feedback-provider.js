@@ -17,7 +17,7 @@ export var FeedbackService = (function (_super) {
         this.localStorage = localStorage;
     }
     // postFeedback function: post feedback 
-    FeedbackService.prototype.postFeedback = function (payload, applicationId) {
+    FeedbackService.prototype.postFeedback = function (baseUrl, payload, applicationId) {
         payload['task'] = 'add';
         var observer = new BehaviorSubject(null);
         var date = new Date();
@@ -28,7 +28,7 @@ export var FeedbackService = (function (_super) {
             payload.userId = user['id'];
         }
         console.log("payload feedback", payload);
-        this.saveBase('/feedbacks/post/', payload, {})
+        this.saveBase(baseUrl, '/feedbacks/post/', payload, {})
             .subscribe(function (data) {
             observer.next(data);
         }, function (error) {

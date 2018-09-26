@@ -9,9 +9,9 @@ export declare class ListsService extends BaseService {
     localStorage: LocalStorageService;
     lists: ListModelGeneral[];
     constructor(http: Http, localStorage: LocalStorageService);
-    postListBasket(payload: any, task: any): BehaviorSubject<any>;
-    postListOrder(payload: any, task: any): BehaviorSubject<any>;
-    getLists(applicationId: any, userId: any, storeId: any): BehaviorSubject<any>;
-    getList(applicationId: any, userId: any, storeId: any, listId: any): BehaviorSubject<any>;
-    postListDelete(payload: any, task: any): BehaviorSubject<any>;
+    postListBasket(baseUrl: any, payload: any, task: any): BehaviorSubject<any>;
+    postListOrder(baseUrl: any, payload: any, task: any): BehaviorSubject<any>;
+    getLists(baseUrl: any, applicationId: any, userId: any, storeId: any): BehaviorSubject<any>;
+    getList(baseUrl: any, applicationId: any, userId: any, storeId: any, listId: any): BehaviorSubject<any>;
+    postListDelete(baseUrl: any, payload: any, task: any): BehaviorSubject<any>;
 }

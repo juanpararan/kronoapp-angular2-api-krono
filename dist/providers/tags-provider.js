@@ -20,11 +20,11 @@ export var TagsService = (function (_super) {
         this.tags = [];
     }
     // getTags function: obtain information of tags in Botica store
-    TagsService.prototype.getTags = function (chainId, storeId, categId, subcategId) {
+    TagsService.prototype.getTags = function (baseUrl, chainId, storeId, categId, subcategId) {
         var _this = this;
         this.tags = [];
         var observer = new BehaviorSubject(null);
-        this.getBase('chain/' + chainId + '/store/' + storeId
+        this.getBase(baseUrl, 'chain/' + chainId + '/store/' + storeId
             + '/category/' + categId + '/subcategory/' +
             subcategId + '/tags/active/', null)
             .subscribe(function (tags) {

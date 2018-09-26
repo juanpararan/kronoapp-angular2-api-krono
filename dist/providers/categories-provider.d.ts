@@ -9,6 +9,6 @@ export declare class CategoriesService extends BaseService {
     localStorage: LocalStorageService;
     categories: CategoryModel[];
     constructor(http: Http, localStorage: LocalStorageService);
-    getCategories(chainId: any, storeId: any): BehaviorSubject<any>;
-    getCategory(chainId: any, storeId: any, categoryId: any): BehaviorSubject<any>;
+    getCategories(baseUrl: any, chainId: any, storeId: any): BehaviorSubject<any>;
+    getCategory(baseUrl: any, chainId: any, storeId: any, categoryId: any): BehaviorSubject<any>;
 }

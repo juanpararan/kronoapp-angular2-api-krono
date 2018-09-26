@@ -21,13 +21,13 @@ export declare class StoreService extends BaseService {
     delivZone: DelivZoneModel[];
     banners: BannerModel[];
     constructor(http: Http, localStorage: LocalStorageService);
-    getStore(chainId: any, storeId: any): BehaviorSubject<any>;
-    getBanners(chainId: any, storeId: any): BehaviorSubject<any>;
-    getBestsellersProductsStore(chainId: any, storeId: any): BehaviorSubject<any>;
-    getBestsellersProductsUser(applicationId: any, userId: any, storeId: any): BehaviorSubject<any>;
-    getSchedule(chainId: any, storeId: any): BehaviorSubject<any>;
-    getPayments(chainId: any, storeId: any): BehaviorSubject<any>;
-    getDelivStores(chainId: any, storeId: any): BehaviorSubject<any>;
-    getStores(chainId: any): BehaviorSubject<any>;
-    getDelivZones(chainId: any, storeId: any): BehaviorSubject<any>;
+    getStore(baseUrl: any, chainId: any, storeId: any): BehaviorSubject<any>;
+    getBanners(baseUrl: any, chainId: any, storeId: any): BehaviorSubject<any>;
+    getBestsellersProductsStore(baseUrl: any, chainId: any, storeId: any): BehaviorSubject<any>;
+    getBestsellersProductsUser(baseUrl: any, applicationId: any, userId: any, storeId: any): BehaviorSubject<any>;
+    getSchedule(baseUrl: any, chainId: any, storeId: any): BehaviorSubject<any>;
+    getPayments(baseUrl: any, chainId: any, storeId: any): BehaviorSubject<any>;
+    getDelivStores(baseUrl: any, chainId: any, storeId: any): BehaviorSubject<any>;
+    getStores(baseUrl: any, chainId: any): BehaviorSubject<any>;
+    getDelivZones(baseUrl: any, chainId: any, storeId: any): BehaviorSubject<any>;
 }

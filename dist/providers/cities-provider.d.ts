@@ -9,5 +9,5 @@ export declare class CitiesService extends BaseService {
     localStorage: LocalStorageService;
     cities: CityModel[];
     constructor(http: Http, localStorage: LocalStorageService);
-    getCities(applicationId: any): BehaviorSubject<any>;
+    getCities(baseUrl: any, applicationId: any): BehaviorSubject<any>;
 }

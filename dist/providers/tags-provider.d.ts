@@ -9,5 +9,5 @@ export declare class TagsService extends BaseService {
     localStorage: LocalStorageService;
     tags: TagModel[];
     constructor(http: Http, localStorage: LocalStorageService);
-    getTags(chainId: any, storeId: any, categId: any, subcategId: any): BehaviorSubject<any>;
+    getTags(baseUrl: any, chainId: any, storeId: any, categId: any, subcategId: any): BehaviorSubject<any>;
 }

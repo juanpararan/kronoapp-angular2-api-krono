@@ -20,12 +20,12 @@ export var SubcategoriesService = (function (_super) {
         this.subcategories = [];
     }
     // getSubcategories function: obtain information of subcategories in Botica store
-    SubcategoriesService.prototype.getSubcategories = function (chainId, storeId, categId) {
+    SubcategoriesService.prototype.getSubcategories = function (baseUrl, chainId, storeId, categId) {
         var _this = this;
         this.subcategories = [];
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.getBase('chain/' + chainId + '/store/' + storeId +
+        this.getBase(baseUrl, 'chain/' + chainId + '/store/' + storeId +
             '/category/' + categId + '/subcategories/active/', null)
             .subscribe(function (subcategories) {
             for (var _i = 0, _a = subcategories; _i < _a.length; _i++) {
@@ -40,10 +40,10 @@ export var SubcategoriesService = (function (_super) {
         return observer;
     };
     // getSubcategory function: obtain information of subcategory in Krono Market
-    SubcategoriesService.prototype.getSubcategory = function (chainId, storeId, categoryId, subcategoryId) {
+    SubcategoriesService.prototype.getSubcategory = function (baseUrl, chainId, storeId, categoryId, subcategoryId) {
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.getBase('chain/' + chainId + '/store/' + storeId +
+        this.getBase(baseUrl, 'chain/' + chainId + '/store/' + storeId +
             '/category/' + categoryId + '/subcategory/' +
             subcategoryId, null)
             .subscribe(function (subcategoryData) {

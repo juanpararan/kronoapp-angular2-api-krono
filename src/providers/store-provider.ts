@@ -41,12 +41,12 @@ export class StoreService extends BaseService {
     }
 
     // getStore function: obtain information of store Botica Junin
-    getStore(chainId, storeId) {
+    getStore(baseUrl, chainId, storeId) {
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
-        this.getBase('chain/' + chainId + '/store/' + storeId 
+        this.getBase(baseUrl, 'chain/' + chainId + '/store/' + storeId 
                      + '/active/', null)
             .subscribe(storeData => {
                 var store: StoreModel = new StoreModel(storeData);
@@ -58,14 +58,14 @@ export class StoreService extends BaseService {
     }
 
     // getBanners function: obtain banners from specific store Botica Junin
-    getBanners(chainId, storeId) {
+    getBanners(baseUrl, chainId, storeId) {
 
         this.banners = [];
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
-        this.getBase('chain/' + chainId + '/store/' + storeId 
+        this.getBase(baseUrl, 'chain/' + chainId + '/store/' + storeId 
                      + '/banners/active/', null)
             .subscribe(banners => {
                 for (var ban of <BannerModel[]>banners) {
@@ -81,14 +81,14 @@ export class StoreService extends BaseService {
 
     // getBestsellersProductsStore function: obtain information of bestsellers products in Botica store
     //                                       when user is not logged
-    getBestsellersProductsStore(chainId, storeId) {
+    getBestsellersProductsStore(baseUrl, chainId, storeId) {
 
         this.products = [];
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
-        this.getBase('chain/' + chainId + '/store/' + storeId + 
+        this.getBase(baseUrl, 'chain/' + chainId + '/store/' + storeId + 
                      '/bestsellers/', null)
             .subscribe(products => {
                 for (var prod of <ProductModel[]>products) {
@@ -104,14 +104,14 @@ export class StoreService extends BaseService {
 
     // getBestsellersProductsUser function: obtain information of bestsellers products in Botica store
     //                                      from specific user
-    getBestsellersProductsUser(applicationId, userId, storeId) {
+    getBestsellersProductsUser(baseUrl, applicationId, userId, storeId) {
 
         this.products = [];
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
-        this.getBase('application/' + applicationId + '/client/' + userId + 
+        this.getBase(baseUrl, 'application/' + applicationId + '/client/' + userId + 
                      '/store/' + storeId + '/bestsellers/', null)
             .subscribe(products => {
                 for (var prod of <ProductModel[]>products) {
@@ -126,14 +126,14 @@ export class StoreService extends BaseService {
     }
 
     // getSchedule function: obtain information of schedule in Botica store
-    getSchedule(chainId, storeId) {
+    getSchedule(baseUrl, chainId, storeId) {
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
         this.schedules = [];
 
-        this.getBase('chain/' + chainId + '/store/' + storeId + 
+        this.getBase(baseUrl, 'chain/' + chainId + '/store/' + storeId + 
                      '/schedules/', this.headerAuthentication())
             .subscribe(schedulesData => {
                 var schedule: ScheduleModel = new ScheduleModel(schedulesData);
@@ -146,14 +146,14 @@ export class StoreService extends BaseService {
     }
 
     // getSchedule function: obtain information of schedule in Botica store
-    getPayments(chainId, storeId) {
+    getPayments(baseUrl, chainId, storeId) {
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
         this.payments = [];
 
-        this.getBase('chain/' + chainId + '/store/' + storeId + 
+        this.getBase(baseUrl , 'chain/' + chainId + '/store/' + storeId + 
                      '/payments/', this.headerAuthentication())
             .subscribe(payments => {
                 for (var pay of <PaymentsModel[]>payments) {
@@ -169,14 +169,14 @@ export class StoreService extends BaseService {
 
     // getDelivStores function: obtain information of existent type of delivery in
     //                          Botica store
-    getDelivStores(chainId, storeId) {
+    getDelivStores(baseUrl , chainId, storeId) {
 
         this.delivStore = [];
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
-        this.getBase('chain/' + chainId + '/store/' + storeId + 
+        this.getBase(baseUrl,  'chain/' + chainId + '/store/' + storeId + 
                      '/delivstores/', this.headerAuthentication())
             .subscribe(delivStore => {
                 for (var deliv of <DelivStoreModel[]>delivStore) {
@@ -191,14 +191,14 @@ export class StoreService extends BaseService {
     }
   
     // getStores function: obtain information of different Botica Junin stores       
-    getStores(chainId) {
+    getStores(baseUrl, chainId) {
 
         this.stores = [];
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
-        this.getBase('chain/' + chainId + '/stores/active/', null)
+        this.getBase(baseUrl, 'chain/' + chainId + '/stores/active/', null)
             .subscribe(stores => {
                 for (var store of <StoreModel[]>stores) {
                     var store: StoreModel = new StoreModel(store);
@@ -212,14 +212,14 @@ export class StoreService extends BaseService {
     }
 
     // getDelivZones function: obtain information of different Delivery Krono Zones
-    getDelivZones(chainId, storeId){
+    getDelivZones(baseUrl, chainId, storeId){
         
         this.delivZone = [];
         
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
-        this.getBase('chain/' + chainId + '/store/' + storeId + 
+        this.getBase(baseUrl,'chain/' + chainId + '/store/' + storeId + 
                         '/delivzones/', this.headerAuthentication())
             .subscribe(delivZones => {
                 for (var deliv of <DelivZoneModel[]>delivZones) {

@@ -19,10 +19,10 @@ export var BasketService = (function (_super) {
     }
     // getBasket function: obtain information of basket
     //                     of specific client in Botica store
-    BasketService.prototype.getBasket = function (applicationId, userId, storeId) {
+    BasketService.prototype.getBasket = function (baseUrl, applicationId, userId, storeId) {
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.getBase('application/' + applicationId + '/client/' + userId +
+        this.getBase(baseUrl, 'application/' + applicationId + '/client/' + userId +
             '/store/' + storeId + '/basket/', this.headerAuthentication())
             .subscribe(function (basket) {
             var basketClient = new BasketModel(basket);
@@ -32,14 +32,27 @@ export var BasketService = (function (_super) {
         });
         return observer;
     };
+    BasketService.prototype.validVersion = function (baseUrl, applicationId) {
+        // Initial value to the observer is null, version is null without Token,
+        var observer = new BehaviorSubject(null);
+        this.getBase(baseUrl, "v2/application/" + applicationId + "/application/" + applicationId +
+            "/version/", null)
+            .subscribe(function (data) {
+            var version = data;
+            observer.next(version);
+        }, function (error) {
+            observer.next(error);
+        });
+        return observer;
+    };
     // postItems function: post items inside basket of specific
     //                     client in Botica store
-    BasketService.prototype.postItemsDelete = function (payload) {
+    BasketService.prototype.postItemsDelete = function (baseUrl, payload) {
         payload['task'] = 'delete_items';
         console.log("payload de lo que hare post", payload);
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.saveBase('client/store/basket/deleteitems/', payload, this.headerAuthentication())
+        this.saveBase(baseUrl, 'client/store/basket/deleteitems/', payload, this.headerAuthentication())
             .subscribe(function (data) {
             observer.next(data);
         }, function (error) {
@@ -49,7 +62,7 @@ export var BasketService = (function (_super) {
     };
     // postItem function: post item inside basket of specific
     //                    client in Botica store
-    BasketService.prototype.postItem = function (item, itemId, typeTask) {
+    BasketService.prototype.postItem = function (baseUrl, item, itemId, typeTask) {
         var _this = this;
         if (itemId === void 0) { itemId = null; }
         if (typeTask == 'add') {
@@ -76,7 +89,7 @@ export var BasketService = (function (_super) {
                 listId: null,
                 productId: item.id
             };
-            this.saveBase('client/store/basket/items/', this.itemPost, this.headerAuthentication())
+            this.saveBase(baseUrl, 'client/store/basket/items/', this.itemPost, this.headerAuthentication())
                 .subscribe(function (data) {
                 console.log("ITEMPOST AL AGREGAR", _this.itemPost);
                 item.loadedProduct.next(data);
@@ -111,7 +124,7 @@ export var BasketService = (function (_super) {
                 listId: null,
                 productId: item.id
             };
-            this.saveBase('client/store/basket/items/', this.itemPost, this.headerAuthentication())
+            this.saveBase(baseUrl, 'client/store/basket/items/', this.itemPost, this.headerAuthentication())
                 .subscribe(function (data) {
                 console.log("ITEMPOST AL EDITAR", _this.itemPost);
             }, function (error) {
@@ -123,7 +136,7 @@ export var BasketService = (function (_super) {
                 task: typeTask,
                 id: itemId
             };
-            this.saveBase('client/store/basket/items/', this.itemPost, this.headerAuthentication())
+            this.saveBase(baseUrl, 'client/store/basket/items/', this.itemPost, this.headerAuthentication())
                 .subscribe(function (data) {
                 console.log("ITEMPOST AL ELIMINAR", _this.itemPost);
             }, function (error) {

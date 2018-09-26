@@ -36,10 +36,10 @@ export var StoreService = (function (_super) {
         this.banners = [];
     }
     // getStore function: obtain information of store Botica Junin
-    StoreService.prototype.getStore = function (chainId, storeId) {
+    StoreService.prototype.getStore = function (baseUrl, chainId, storeId) {
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.getBase('chain/' + chainId + '/store/' + storeId
+        this.getBase(baseUrl, 'chain/' + chainId + '/store/' + storeId
             + '/active/', null)
             .subscribe(function (storeData) {
             var store = new StoreModel(storeData);
@@ -50,12 +50,12 @@ export var StoreService = (function (_super) {
         return observer;
     };
     // getBanners function: obtain banners from specific store Botica Junin
-    StoreService.prototype.getBanners = function (chainId, storeId) {
+    StoreService.prototype.getBanners = function (baseUrl, chainId, storeId) {
         var _this = this;
         this.banners = [];
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.getBase('chain/' + chainId + '/store/' + storeId
+        this.getBase(baseUrl, 'chain/' + chainId + '/store/' + storeId
             + '/banners/active/', null)
             .subscribe(function (banners) {
             for (var _i = 0, _a = banners; _i < _a.length; _i++) {
@@ -71,12 +71,12 @@ export var StoreService = (function (_super) {
     };
     // getBestsellersProductsStore function: obtain information of bestsellers products in Botica store
     //                                       when user is not logged
-    StoreService.prototype.getBestsellersProductsStore = function (chainId, storeId) {
+    StoreService.prototype.getBestsellersProductsStore = function (baseUrl, chainId, storeId) {
         var _this = this;
         this.products = [];
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.getBase('chain/' + chainId + '/store/' + storeId +
+        this.getBase(baseUrl, 'chain/' + chainId + '/store/' + storeId +
             '/bestsellers/', null)
             .subscribe(function (products) {
             for (var _i = 0, _a = products; _i < _a.length; _i++) {
@@ -92,12 +92,12 @@ export var StoreService = (function (_super) {
     };
     // getBestsellersProductsUser function: obtain information of bestsellers products in Botica store
     //                                      from specific user
-    StoreService.prototype.getBestsellersProductsUser = function (applicationId, userId, storeId) {
+    StoreService.prototype.getBestsellersProductsUser = function (baseUrl, applicationId, userId, storeId) {
         var _this = this;
         this.products = [];
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.getBase('application/' + applicationId + '/client/' + userId +
+        this.getBase(baseUrl, 'application/' + applicationId + '/client/' + userId +
             '/store/' + storeId + '/bestsellers/', null)
             .subscribe(function (products) {
             for (var _i = 0, _a = products; _i < _a.length; _i++) {
@@ -112,12 +112,12 @@ export var StoreService = (function (_super) {
         return observer;
     };
     // getSchedule function: obtain information of schedule in Botica store
-    StoreService.prototype.getSchedule = function (chainId, storeId) {
+    StoreService.prototype.getSchedule = function (baseUrl, chainId, storeId) {
         var _this = this;
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
         this.schedules = [];
-        this.getBase('chain/' + chainId + '/store/' + storeId +
+        this.getBase(baseUrl, 'chain/' + chainId + '/store/' + storeId +
             '/schedules/', this.headerAuthentication())
             .subscribe(function (schedulesData) {
             var schedule = new ScheduleModel(schedulesData);
@@ -129,12 +129,12 @@ export var StoreService = (function (_super) {
         return observer;
     };
     // getSchedule function: obtain information of schedule in Botica store
-    StoreService.prototype.getPayments = function (chainId, storeId) {
+    StoreService.prototype.getPayments = function (baseUrl, chainId, storeId) {
         var _this = this;
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
         this.payments = [];
-        this.getBase('chain/' + chainId + '/store/' + storeId +
+        this.getBase(baseUrl, 'chain/' + chainId + '/store/' + storeId +
             '/payments/', this.headerAuthentication())
             .subscribe(function (payments) {
             for (var _i = 0, _a = payments; _i < _a.length; _i++) {
@@ -150,12 +150,12 @@ export var StoreService = (function (_super) {
     };
     // getDelivStores function: obtain information of existent type of delivery in
     //                          Botica store
-    StoreService.prototype.getDelivStores = function (chainId, storeId) {
+    StoreService.prototype.getDelivStores = function (baseUrl, chainId, storeId) {
         var _this = this;
         this.delivStore = [];
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.getBase('chain/' + chainId + '/store/' + storeId +
+        this.getBase(baseUrl, 'chain/' + chainId + '/store/' + storeId +
             '/delivstores/', this.headerAuthentication())
             .subscribe(function (delivStore) {
             for (var _i = 0, _a = delivStore; _i < _a.length; _i++) {
@@ -170,12 +170,12 @@ export var StoreService = (function (_super) {
         return observer;
     };
     // getStores function: obtain information of different Botica Junin stores       
-    StoreService.prototype.getStores = function (chainId) {
+    StoreService.prototype.getStores = function (baseUrl, chainId) {
         var _this = this;
         this.stores = [];
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.getBase('chain/' + chainId + '/stores/active/', null)
+        this.getBase(baseUrl, 'chain/' + chainId + '/stores/active/', null)
             .subscribe(function (stores) {
             for (var _i = 0, _a = stores; _i < _a.length; _i++) {
                 var store = _a[_i];
@@ -189,12 +189,12 @@ export var StoreService = (function (_super) {
         return observer;
     };
     // getDelivZones function: obtain information of different Delivery Krono Zones
-    StoreService.prototype.getDelivZones = function (chainId, storeId) {
+    StoreService.prototype.getDelivZones = function (baseUrl, chainId, storeId) {
         var _this = this;
         this.delivZone = [];
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.getBase('chain/' + chainId + '/store/' + storeId +
+        this.getBase(baseUrl, 'chain/' + chainId + '/store/' + storeId +
             '/delivzones/', this.headerAuthentication())
             .subscribe(function (delivZones) {
             for (var _i = 0, _a = delivZones; _i < _a.length; _i++) {

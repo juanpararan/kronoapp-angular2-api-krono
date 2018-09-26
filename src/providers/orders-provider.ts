@@ -26,14 +26,14 @@ export class OrdersService extends BaseService {
 
     // postOrder function: post order inside orders of specific
     //                     client in Botica store
-    postOrder(payload) {
+    postOrder(baseUrl, payload) {
         
         payload['task'] = 'add';
 
         let observer = new BehaviorSubject(null);
 
         console.log("payload de lo que hare post con order", payload);
-        this.saveBase('chain/store/client/basket/payment/prescription/orders/', payload, 
+        this.saveBase(baseUrl, 'chain/store/client/basket/payment/prescription/orders/', payload, 
                       this.headerAuthentication())
             .subscribe(data => {              
                 observer.next(data);
@@ -44,13 +44,13 @@ export class OrdersService extends BaseService {
     }
 
     // getPrescription function: obtain information of user last prescription in Botica store
-    getPrescription(applicationId, userId) {
+    getPrescription(baseUrl, applicationId, userId) {
 
         this.prescriptions = [];
 
         let observer = new BehaviorSubject(null);
 
-        this.getBase('application/' + applicationId + '/client/' + userId + '/prescriptions/last/',
+        this.getBase(baseUrl , 'application/' + applicationId + '/client/' + userId + '/prescriptions/last/',
                      this.headerAuthentication())
             .subscribe(prescriptions => {
                 for (var presc of <PrescriptionModel[]>prescriptions) {
@@ -66,13 +66,13 @@ export class OrdersService extends BaseService {
 
     // getOrders function: obtain information of orders of specific client
     //                     in Botica store
-    getOrders(applicationId, userId, storeId) {
+    getOrders(baseUrl, applicationId, userId, storeId) {
 
         this.orders = [];
 
         let observer = new BehaviorSubject(null);
 
-        this.getBase('application/' + applicationId + '/client/' + userId + '/store/' + 
+        this.getBase(baseUrl , 'application/' + applicationId + '/client/' + userId + '/store/' + 
                      storeId + '/orders/', this.headerAuthentication())
             .subscribe(orders => {
                 for (var ord of <OrderModel[]>orders) {
@@ -88,13 +88,13 @@ export class OrdersService extends BaseService {
 
     // getOrders function: obtain information of orders of specific client
     //                     in Botica store
-    getOrdersKrono(applicationId, userId) {
+    getOrdersKrono(baseUrl, applicationId, userId) {
 
         this.orders = [];
 
         let observer = new BehaviorSubject(null);
 
-        this.getBase('application/' + applicationId + '/client/' + userId + '/orders/', this.headerAuthentication())
+        this.getBase(baseUrl, 'application/' + applicationId + '/client/' + userId + '/orders/', this.headerAuthentication())
             .subscribe(orders => {
                 for (var ord of <OrderModel[]>orders) {
                     var order: OrderModel = new OrderModel(ord);
@@ -109,11 +109,11 @@ export class OrdersService extends BaseService {
 
 
     // getOrder function: obtain information of specific client order
-    getOrder(applicationId, userId, storeId, orderId) {
+    getOrder(baseUrl, applicationId, userId, storeId, orderId) {
 
         let observer = new BehaviorSubject(null);
 
-        this.getBase('application/' + applicationId + '/client/' + userId + '/store/' + 
+        this.getBase(baseUrl , 'application/' + applicationId + '/client/' + userId + '/store/' + 
                      storeId + '/order/' + orderId + '/', this.headerAuthentication())
             .subscribe(order => {
                 for (var i of order['items']) {

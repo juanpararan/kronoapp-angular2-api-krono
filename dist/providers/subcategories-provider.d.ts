@@ -9,6 +9,6 @@ export declare class SubcategoriesService extends BaseService {
     localStorage: LocalStorageService;
     subcategories: SubcategoryModel[];
     constructor(http: Http, localStorage: LocalStorageService);
-    getSubcategories(chainId: any, storeId: any, categId: any): BehaviorSubject<any>;
-    getSubcategory(chainId: any, storeId: any, categoryId: any, subcategoryId: any): BehaviorSubject<any>;
+    getSubcategories(baseUrl: any, chainId: any, storeId: any, categId: any): BehaviorSubject<any>;
+    getSubcategory(baseUrl: any, chainId: any, storeId: any, categoryId: any, subcategoryId: any): BehaviorSubject<any>;
 }

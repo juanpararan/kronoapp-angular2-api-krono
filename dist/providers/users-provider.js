@@ -20,10 +20,10 @@ export var UsersService = (function (_super) {
         this.user = [];
     }
     // getUser function: obtain information of user in Botica Junin
-    UsersService.prototype.getUser = function (applicationId, userId) {
+    UsersService.prototype.getUser = function (baseUrl, applicationId, userId) {
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.getBase('application/' + applicationId + '/client/' + userId + '/', this.headerAuthentication())
+        this.getBase(baseUrl, 'application/' + applicationId + '/client/' + userId + '/', this.headerAuthentication())
             .subscribe(function (userData) {
             var user = new UserModel(userData);
             observer.next(user);
@@ -33,12 +33,12 @@ export var UsersService = (function (_super) {
         return observer;
     };
     // postUser function: create new user in application Botica
-    UsersService.prototype.postUser = function (payload, task) {
+    UsersService.prototype.postUser = function (baseUrl, payload, task) {
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
         payload['task'] = task;
         console.log("PAYLOAD USER REGISTRO", payload);
-        this.saveBase('application/clients/', payload, null)
+        this.saveBase(baseUrl, 'application/clients/', payload, null)
             .subscribe(function (data) {
             observer.next(data);
         }, function (error) {
@@ -48,12 +48,12 @@ export var UsersService = (function (_super) {
     };
     // postAddress function: create or delete address in
     //                       specific client profile
-    UsersService.prototype.postAddress = function (payload, task) {
+    UsersService.prototype.postAddress = function (baseUrl, payload, task) {
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
         payload['task'] = task;
         console.log("PAYLOAD ADDRESS USER", payload);
-        this.saveBase('application/client/address/', payload, this.headerAuthentication())
+        this.saveBase(baseUrl, 'application/client/address/', payload, this.headerAuthentication())
             .subscribe(function (data) {
             observer.next(data);
         }, function (error) {

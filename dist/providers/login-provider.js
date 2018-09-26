@@ -17,11 +17,11 @@ export var LoginService = (function (_super) {
         this.localStorage = localStorage;
     }
     // postLoginBotica function: post email and password to authenticate
-    LoginService.prototype.postLoginBotica = function (payload) {
+    LoginService.prototype.postLoginBotica = function (baseUrl, payload) {
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
         console.log("PAYLOAD USER LOGIN", payload);
-        this.saveBase('api-token-auth-client/', payload, this.headerLogin())
+        this.saveBase(baseUrl, 'api-token-auth-client/', payload, this.headerLogin())
             .subscribe(function (data) {
             observer.next(data);
         }, function (error) {
@@ -30,9 +30,9 @@ export var LoginService = (function (_super) {
         return observer;
     };
     // authFacebook void: post user to login in facebook with the backend
-    LoginService.prototype.authFacebook = function (payload, observer) {
+    LoginService.prototype.authFacebook = function (baseUrl, payload, observer) {
         var _this = this;
-        this.saveBase('api-token-auth-client-facebook/', payload, this.headerLogin())
+        this.saveBase(baseUrl, 'api-token-auth-client-facebook/', payload, this.headerLogin())
             .subscribe(function (data) {
             _this.localStorage.set('facebook', true);
             observer.next(data);
@@ -41,9 +41,9 @@ export var LoginService = (function (_super) {
         });
     };
     // authGoogle void: post user to login in google with the backend
-    LoginService.prototype.authGoogle = function (payload, observer) {
+    LoginService.prototype.authGoogle = function (baseUrl, payload, observer) {
         var _this = this;
-        this.saveBase('api-token-auth-client-google/', payload, this.headerLogin())
+        this.saveBase(baseUrl, 'api-token-auth-client-google/', payload, this.headerLogin())
             .subscribe(function (data) {
             _this.localStorage.set('google', true);
             observer.next(data);
@@ -52,10 +52,10 @@ export var LoginService = (function (_super) {
         });
     };
     // postLoginAfterRegisterGoogle function: after register user, login with google
-    LoginService.prototype.postloginAfterRegisterGoogle = function (payload) {
+    LoginService.prototype.postloginAfterRegisterGoogle = function (baseUrl, payload) {
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.saveBase('api-token-auth-client-google/', payload, this.headerLogin())
+        this.saveBase(baseUrl, 'api-token-auth-client-google/', payload, this.headerLogin())
             .subscribe(function (data) {
             observer.next(data);
         }, function (error) {
@@ -64,10 +64,10 @@ export var LoginService = (function (_super) {
         return observer;
     };
     // postLoginAfterRegisterFacebook function: after register user, login with facebook
-    LoginService.prototype.postLoginAfterRegisterFacebook = function (payload) {
+    LoginService.prototype.postLoginAfterRegisterFacebook = function (baseUrl, payload) {
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.saveBase('api-token-auth-client-facebook/', payload, this.headerLogin())
+        this.saveBase(baseUrl, 'api-token-auth-client-facebook/', payload, this.headerLogin())
             .subscribe(function (data) {
             observer.next(data);
         }, function (error) {
@@ -77,10 +77,10 @@ export var LoginService = (function (_super) {
     };
     // forgotPassword function: user forgot password and send to backend
     //                          to verify and send e-mail to recover password
-    LoginService.prototype.forgotPassword = function (payload) {
+    LoginService.prototype.forgotPassword = function (baseUrl, payload) {
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.saveBase('changepassword/user/application/', payload, this.headerLogin())
+        this.saveBase(baseUrl, 'changepassword/user/application/', payload, this.headerLogin())
             .subscribe(function (data) {
             observer.next(data);
         }, function (error) {

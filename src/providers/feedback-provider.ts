@@ -15,7 +15,7 @@ export class FeedbackService extends BaseService {
     }
 
     // postFeedback function: post feedback 
-    postFeedback(payload, applicationId) {
+    postFeedback(baseUrl, payload, applicationId) {
 
         payload['task'] = 'add';
 
@@ -31,7 +31,7 @@ export class FeedbackService extends BaseService {
         }
 
         console.log("payload feedback", payload);
-        this.saveBase('/feedbacks/post/', payload, {})
+        this.saveBase(baseUrl , '/feedbacks/post/', payload, {})
                 .subscribe(data => {
                     observer.next(data);
                 }, error => {

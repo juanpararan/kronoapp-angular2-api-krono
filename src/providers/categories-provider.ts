@@ -21,14 +21,14 @@ export class CategoriesService extends BaseService {
     }
 
     // getCategories function: obtain information of categories in Botica store
-    getCategories(chainId, storeId) {
+    getCategories(baseUrl, chainId, storeId) {
 
         this.categories = [];
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
-        this.getBase('chain/' + chainId + '/store/' + storeId + 
+        this.getBase(baseUrl , 'chain/' + chainId + '/store/' + storeId + 
                      '/categories/active/', null)
             .subscribe(categories => {
                 for (var cat of <CategoryModel[]>categories) {
@@ -43,12 +43,12 @@ export class CategoriesService extends BaseService {
     }
 
     // getCategories function: obtain information of category in Krono Market
-    getCategory(chainId, storeId, categoryId) {
+    getCategory(baseUrl, chainId, storeId, categoryId) {
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
-        this.getBase('chain/' + chainId + '/store/' + storeId + 
+        this.getBase(baseUrl , 'chain/' + chainId + '/store/' + storeId + 
                      '/category/' + categoryId, null)
             .subscribe(categoryData => {
                 let category: CategoryModel = new CategoryModel(categoryData);

@@ -11,9 +11,9 @@ export declare class OrdersService extends BaseService {
     prescriptions: PrescriptionModel[];
     orders: OrderModel[];
     constructor(http: Http, localStorage: LocalStorageService);
-    postOrder(payload: any): BehaviorSubject<any>;
-    getPrescription(applicationId: any, userId: any): BehaviorSubject<any>;
-    getOrders(applicationId: any, userId: any, storeId: any): BehaviorSubject<any>;
-    getOrdersKrono(applicationId: any, userId: any): BehaviorSubject<any>;
-    getOrder(applicationId: any, userId: any, storeId: any, orderId: any): BehaviorSubject<any>;
+    postOrder(baseUrl: any, payload: any): BehaviorSubject<any>;
+    getPrescription(baseUrl: any, applicationId: any, userId: any): BehaviorSubject<any>;
+    getOrders(baseUrl: any, applicationId: any, userId: any, storeId: any): BehaviorSubject<any>;
+    getOrdersKrono(baseUrl: any, applicationId: any, userId: any): BehaviorSubject<any>;
+    getOrder(baseUrl: any, applicationId: any, userId: any, storeId: any, orderId: any): BehaviorSubject<any>;
 }

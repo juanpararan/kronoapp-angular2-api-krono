@@ -22,14 +22,14 @@ export class ListsService extends BaseService {
 
     // postListBasket function: create, or delete list in
     //                    specific client
-    postListBasket(payload, task) {
+    postListBasket(baseUrl, payload, task) {
 
         let observer = new BehaviorSubject(null);
 
         payload['task'] = task;
 
         console.log("PAYLOAD LIST USER", payload);
-        this.saveBase('client/store/newlist/basket/', payload, 
+        this.saveBase(baseUrl , 'client/store/newlist/basket/', payload, 
                       this.headerAuthentication())
             .subscribe(data => {
                 observer.next(data);
@@ -42,14 +42,14 @@ export class ListsService extends BaseService {
 
     // postListOrder function: create, or delete list in
     //                         specific client
-    postListOrder(payload, task) {
+    postListOrder(baseUrl,payload, task) {
 
         let observer = new BehaviorSubject(null);
 
         payload['task'] = task;
 
         console.log("PAYLOAD LIST USER", payload);
-        this.saveBase('client/store/newlist/order/', payload, 
+        this.saveBase(baseUrl , 'client/store/newlist/order/', payload, 
                       this.headerAuthentication())
             .subscribe(data => {
                 observer.next(data);
@@ -60,13 +60,13 @@ export class ListsService extends BaseService {
     }
 
     // getLists function: obtain all lists of specific user
-    getLists(applicationId, userId, storeId) {
+    getLists(baseUrl, applicationId, userId, storeId) {
 
         this.lists = [];
 
         let observer = new BehaviorSubject(null);
 
-        this.getBase('application/' + applicationId + '/client/' + userId
+        this.getBase(baseUrl , 'application/' + applicationId + '/client/' + userId
                      + '/store/' + storeId + '/lists/', this.headerAuthentication())
             .subscribe(lists => {
                 for (var list of <ListModelGeneral[]>lists) {
@@ -81,11 +81,11 @@ export class ListsService extends BaseService {
     }
 
     // getList function: obtain specific list of specific user
-    getList(applicationId, userId, storeId, listId) {
+    getList(baseUrl, applicationId, userId, storeId, listId) {
 
         let observer = new BehaviorSubject(null);
 
-        this.getBase('application/' + applicationId + '/client/' + userId
+        this.getBase(baseUrl , 'application/' + applicationId + '/client/' + userId
                      + '/store/' + storeId + '/list/' + listId + '/', this.headerAuthentication())
             .subscribe(list => {
                 for (var i of list['items']) {
@@ -102,14 +102,14 @@ export class ListsService extends BaseService {
     }
 
     // postListDelete function: post client list to delete in backend
-    postListDelete(payload, task) {
+    postListDelete(baseUrl, payload, task) {
 
         let observer = new BehaviorSubject(null);
 
         payload['task'] = task;
 
         console.log("PAYLOAD LIST USER", payload);
-        this.saveBase('client/store/deletelist/', payload, 
+        this.saveBase(baseUrl , 'client/store/deletelist/', payload, 
                       this.headerAuthentication())
             .subscribe(data => {
                 observer.next(data);

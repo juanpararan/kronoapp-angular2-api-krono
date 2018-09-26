@@ -22,14 +22,14 @@ export class CouponsService extends BaseService {
     }
 
     // getCoupons function: get coupons of specific client in Botica Junín
-    getCoupons(chainId, storeId) {
+    getCoupons(baseUrl, chainId, storeId) {
 
         this.coupons = [];
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
-        this.getBase('chain/' + chainId + '/store/' + storeId + 
+        this.getBase(baseUrl , 'chain/' + chainId + '/store/' + storeId + 
                      '/coupons/active/', null)
             .subscribe(coupons => {
                 for (var coup of <CouponModel[]>coupons) {
@@ -44,12 +44,12 @@ export class CouponsService extends BaseService {
     }
 
     // getCoupon function: get specific coupon from specific client in Botica Junín
-    getCoupon(chainId, storeId, couponId) {
+    getCoupon(baseUrl, chainId, storeId, couponId) {
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
-        this.getBase('chain/' + chainId + '/store/' + storeId + 
+        this.getBase(baseUrl , 'chain/' + chainId + '/store/' + storeId + 
                      '/coupon/' + couponId + '/active/', null)
             .subscribe(couponData => {
                 for (var i of <CouponModel[]>couponData['products']) {
@@ -64,12 +64,12 @@ export class CouponsService extends BaseService {
     }
 
     // getCouponWithPromCode function: get specific coupon with the promotional code
-    getCouponWithPromCode(applicationId, userId, storeId, code) {
+    getCouponWithPromCode(baseUrl, applicationId, userId, storeId, code) {
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
-        this.getBase('application/' + applicationId + '/client/' + userId + 
+        this.getBase(baseUrl , 'application/' + applicationId + '/client/' + userId + 
                      '/store/' + storeId + '/coupon/active/code/' + code + '/', this.headerAuthentication())
             .subscribe(couponData => {
                 for (var i of <CouponModel[]>couponData['products']) {
@@ -84,12 +84,12 @@ export class CouponsService extends BaseService {
     }
 
     // getVerifyCouponRules function: get if coupon is valid or not 
-    getVerifyCouponRules(applicationId, userId, storeId, couponId) {
+    getVerifyCouponRules(baseUrl, applicationId, userId, storeId, couponId) {
 
          // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
-        this.getBase('application/' + applicationId + '/client/' + userId + 
+        this.getBase(baseUrl , 'application/' + applicationId + '/client/' + userId + 
                      '/store/' + storeId + '/valid/coupon/' + couponId + '/', this.headerAuthentication())
             .subscribe(couponData => {
                 observer.next(couponData);                                              

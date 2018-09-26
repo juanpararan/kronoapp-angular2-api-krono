@@ -21,11 +21,11 @@ export var ListsService = (function (_super) {
     }
     // postListBasket function: create, or delete list in
     //                    specific client
-    ListsService.prototype.postListBasket = function (payload, task) {
+    ListsService.prototype.postListBasket = function (baseUrl, payload, task) {
         var observer = new BehaviorSubject(null);
         payload['task'] = task;
         console.log("PAYLOAD LIST USER", payload);
-        this.saveBase('client/store/newlist/basket/', payload, this.headerAuthentication())
+        this.saveBase(baseUrl, 'client/store/newlist/basket/', payload, this.headerAuthentication())
             .subscribe(function (data) {
             observer.next(data);
         }, function (error) {
@@ -35,11 +35,11 @@ export var ListsService = (function (_super) {
     };
     // postListOrder function: create, or delete list in
     //                         specific client
-    ListsService.prototype.postListOrder = function (payload, task) {
+    ListsService.prototype.postListOrder = function (baseUrl, payload, task) {
         var observer = new BehaviorSubject(null);
         payload['task'] = task;
         console.log("PAYLOAD LIST USER", payload);
-        this.saveBase('client/store/newlist/order/', payload, this.headerAuthentication())
+        this.saveBase(baseUrl, 'client/store/newlist/order/', payload, this.headerAuthentication())
             .subscribe(function (data) {
             observer.next(data);
         }, function (error) {
@@ -48,11 +48,11 @@ export var ListsService = (function (_super) {
         return observer;
     };
     // getLists function: obtain all lists of specific user
-    ListsService.prototype.getLists = function (applicationId, userId, storeId) {
+    ListsService.prototype.getLists = function (baseUrl, applicationId, userId, storeId) {
         var _this = this;
         this.lists = [];
         var observer = new BehaviorSubject(null);
-        this.getBase('application/' + applicationId + '/client/' + userId
+        this.getBase(baseUrl, 'application/' + applicationId + '/client/' + userId
             + '/store/' + storeId + '/lists/', this.headerAuthentication())
             .subscribe(function (lists) {
             for (var _i = 0, _a = lists; _i < _a.length; _i++) {
@@ -67,9 +67,9 @@ export var ListsService = (function (_super) {
         return observer;
     };
     // getList function: obtain specific list of specific user
-    ListsService.prototype.getList = function (applicationId, userId, storeId, listId) {
+    ListsService.prototype.getList = function (baseUrl, applicationId, userId, storeId, listId) {
         var observer = new BehaviorSubject(null);
-        this.getBase('application/' + applicationId + '/client/' + userId
+        this.getBase(baseUrl, 'application/' + applicationId + '/client/' + userId
             + '/store/' + storeId + '/list/' + listId + '/', this.headerAuthentication())
             .subscribe(function (list) {
             for (var _i = 0, _a = list['items']; _i < _a.length; _i++) {
@@ -86,11 +86,11 @@ export var ListsService = (function (_super) {
         return observer;
     };
     // postListDelete function: post client list to delete in backend
-    ListsService.prototype.postListDelete = function (payload, task) {
+    ListsService.prototype.postListDelete = function (baseUrl, payload, task) {
         var observer = new BehaviorSubject(null);
         payload['task'] = task;
         console.log("PAYLOAD LIST USER", payload);
-        this.saveBase('client/store/deletelist/', payload, this.headerAuthentication())
+        this.saveBase(baseUrl, 'client/store/deletelist/', payload, this.headerAuthentication())
             .subscribe(function (data) {
             observer.next(data);
         }, function (error) {

@@ -16,7 +16,7 @@ export class BaseService {
     path: string = "https://api.kronogroup.co/";
     //path: string = 'http://api-dev.kronogroup.co/';
     //path: string = 'https://api-qa.kronogroup.co/';
-
+    baseurl: any;
     info: any;
     headerObject: any;
 
@@ -27,8 +27,9 @@ export class BaseService {
     }
 
     // getBase function: get information from server with base path url 
-    getBase(path2, options=null) {
+    getBase( baseUrl, path2, options=null) {
 
+        this.baseurl = baseUrl;
         let d = new Date();
         let actualTime = Math.floor(d.getTime()/1000);
         let tokenExp: any = this.localStorage.get('tokenExp');
@@ -40,7 +41,7 @@ export class BaseService {
             return new Observable(observer => {
                 this.postRefreshToken().subscribe(data => {
                     if (data) {
-                        this.http.get(this.path + path2, this.headerAuthentication())
+                        this.http.get(baseUrl + path2, this.headerAuthentication())
                         .map(res => res.json())
                         .catch(this.handleError)
                         .retry(5)
@@ -51,7 +52,7 @@ export class BaseService {
             });
         }
         else {
-            return this.http.get(this.path + path2, options)
+            return this.http.get(baseUrl + path2, options)
                 .map(res => res.json())
                 .catch(this.handleError)
                 .retry(5)  
@@ -60,8 +61,9 @@ export class BaseService {
     }
 
     // saveBase function: post in server with base path url
-    saveBase(path2, payload, options=null) {
+    saveBase(baseUrl, path2, payload, options=null) {
 
+        this.baseurl = baseUrl;
         let d = new Date();
         let actualTime = Math.floor(d.getTime()/1000);
 
@@ -72,7 +74,7 @@ export class BaseService {
             return new Observable(observer => {
                 this.postRefreshToken().subscribe(data => {
                     if (data) {
-                        this.http.post(this.path + path2, payload, this.headerAuthentication())
+                        this.http.post(baseUrl + path2, payload, this.headerAuthentication())
                         .map(res => res.json())
                         .catch(this.handleError)
                         .retry(5) 
@@ -83,7 +85,7 @@ export class BaseService {
             });
         }
         else {
-            return this.http.post(this.path + path2, payload, options)
+            return this.http.post(baseUrl + path2, payload, options)
                         .map(res => res.json())
                         .catch(this.handleError)
                         .retry(5)  
@@ -135,7 +137,7 @@ export class BaseService {
             'token': this.localStorage.get('tokenUser')
         }
 
-        this.http.post(this.path + 'api-token-refresh-client/', postToken, null)
+        this.http.post(this.baseurl + 'api-token-refresh-client/', postToken, null)
                 .map(res => res.json())
                 .catch(this.handleError)
                 .subscribe(data => {

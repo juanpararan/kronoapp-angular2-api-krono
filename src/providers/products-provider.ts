@@ -31,13 +31,13 @@ export class ProductsService extends BaseService {
     }
 
     // getStoreProducts function: obtain information of products from specific subcategory in Botica store
-    getProducts(chainId, storeId, categId, subcategId, ini, fin) {
+    getProducts(baseUrl, chainId, storeId, categId, subcategId, ini, fin) {
 
         this.products = [];
 
         let observer = new BehaviorSubject(null);
 
-        this.getBase('chain/' + chainId + '/store/' + storeId + '/category/' 
+        this.getBase(baseUrl , 'chain/' + chainId + '/store/' + storeId + '/category/' 
                      + categId + '/subcategory/' + subcategId + '/products/active/'
                     + ini + '/' + fin + '/', null)
             .subscribe(products => {
@@ -54,13 +54,13 @@ export class ProductsService extends BaseService {
 
     // getProductsPerTag function: obtain information of products from specific subcategory and tag
     //                             in Botica store
-    getProductsPerTag(chainId, storeId, categId, subcategId, tagId, ini, fin) {
+    getProductsPerTag(baseUrl,chainId, storeId, categId, subcategId, tagId, ini, fin) {
 
         this.productsTags = [];
 
         let observer = new BehaviorSubject(null);
 
-        this.getBase('chain/' + chainId + '/store/' + storeId + '/category/' 
+        this.getBase(baseUrl , 'chain/' + chainId + '/store/' + storeId + '/category/' 
                      + categId + '/subcategory/' + subcategId + '/tag/' + tagId +
                      '/products/active/' + ini + '/' + fin + '/', null)
             .subscribe(products => {
@@ -76,11 +76,11 @@ export class ProductsService extends BaseService {
     }
 
     // getStoreProduct function: obtain information of product in Botica store
-    getProduct(chainId, storeId, productId) {
+    getProduct(baseUrl, chainId, storeId, productId) {
 
         let observer = new BehaviorSubject(null);
 
-        this.getBase('chain/' + chainId + '/store/' + storeId + '/product/' + productId + '/', null)
+        this.getBase(baseUrl , 'chain/' + chainId + '/store/' + storeId + '/product/' + productId + '/', null)
             .subscribe(product => {
                 var productStore: ProductModel = new ProductModel(product);
                 observer.next(productStore);
@@ -91,7 +91,7 @@ export class ProductsService extends BaseService {
     }
 
     // getProductsSought function: obtain products with search in backend
-    getProductsSought(chainId, storeId, text, ini, fin) {
+    getProductsSought(baseUrl, chainId, storeId, text, ini, fin) {
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
@@ -101,7 +101,7 @@ export class ProductsService extends BaseService {
             this.searching = true;
             this.productsSought = [];
 
-            this.getBase('chain/' + chainId + '/store/' + storeId + 
+            this.getBase(baseUrl , 'chain/' + chainId + '/store/' + storeId + 
                          '/products/active/' + ini + '/' + fin + '/' + encodeURI(text) + '/', null)
                 .subscribe(products => {
                     this.searching = false;

@@ -20,13 +20,13 @@ export var ChainsService = (function (_super) {
         this.chains = [];
     }
     // getChains function: obtain information of chains 
-    ChainsService.prototype.getChains = function (applicationId, cityId) {
+    ChainsService.prototype.getChains = function (baseUrl, applicationId, cityId) {
         var _this = this;
         this.chains = [];
         this.chainsStorage = {};
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.getBase('application/' + applicationId + '/city/' + cityId + '/chains/active/')
+        this.getBase(baseUrl, 'application/' + applicationId + '/city/' + cityId + '/chains/active/')
             .subscribe(function (chains) {
             for (var _i = 0, _a = chains; _i < _a.length; _i++) {
                 var cha = _a[_i];

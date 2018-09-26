@@ -20,12 +20,12 @@ export var CategoriesService = (function (_super) {
         this.categories = [];
     }
     // getCategories function: obtain information of categories in Botica store
-    CategoriesService.prototype.getCategories = function (chainId, storeId) {
+    CategoriesService.prototype.getCategories = function (baseUrl, chainId, storeId) {
         var _this = this;
         this.categories = [];
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.getBase('chain/' + chainId + '/store/' + storeId +
+        this.getBase(baseUrl, 'chain/' + chainId + '/store/' + storeId +
             '/categories/active/', null)
             .subscribe(function (categories) {
             for (var _i = 0, _a = categories; _i < _a.length; _i++) {
@@ -40,10 +40,10 @@ export var CategoriesService = (function (_super) {
         return observer;
     };
     // getCategories function: obtain information of category in Krono Market
-    CategoriesService.prototype.getCategory = function (chainId, storeId, categoryId) {
+    CategoriesService.prototype.getCategory = function (baseUrl, chainId, storeId, categoryId) {
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.getBase('chain/' + chainId + '/store/' + storeId +
+        this.getBase(baseUrl, 'chain/' + chainId + '/store/' + storeId +
             '/category/' + categoryId, null)
             .subscribe(function (categoryData) {
             var category = new CategoryModel(categoryData);

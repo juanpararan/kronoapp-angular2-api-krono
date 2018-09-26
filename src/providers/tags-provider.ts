@@ -21,13 +21,13 @@ export class TagsService extends BaseService {
     }
 
     // getTags function: obtain information of tags in Botica store
-    getTags(chainId, storeId, categId, subcategId) {
+    getTags(baseUrl , chainId, storeId, categId, subcategId) {
 
         this.tags = [];
 
         let observer = new BehaviorSubject(null);
 
-        this.getBase('chain/' + chainId + '/store/' + storeId 
+        this.getBase(baseUrl , 'chain/' + chainId + '/store/' + storeId 
                     + '/category/' + categId + '/subcategory/' + 
                     subcategId + '/tags/active/', null)
             .subscribe(tags => {

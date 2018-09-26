@@ -7,5 +7,5 @@ export declare class FeedbackService extends BaseService {
     http: Http;
     localStorage: LocalStorageService;
     constructor(http: Http, localStorage: LocalStorageService);
-    postFeedback(payload: any, applicationId: any): BehaviorSubject<any>;
+    postFeedback(baseUrl: any, payload: any, applicationId: any): BehaviorSubject<any>;
 }

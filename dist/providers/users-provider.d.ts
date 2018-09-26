@@ -9,7 +9,7 @@ export declare class UsersService extends BaseService {
     localStorage: LocalStorageService;
     user: UserModel[];
     constructor(http: Http, localStorage: LocalStorageService);
-    getUser(applicationId: any, userId: any): BehaviorSubject<any>;
-    postUser(payload: any, task: any): BehaviorSubject<any>;
-    postAddress(payload: any, task: any): BehaviorSubject<any>;
+    getUser(baseUrl: any, applicationId: any, userId: any): BehaviorSubject<any>;
+    postUser(baseUrl: any, payload: any, task: any): BehaviorSubject<any>;
+    postAddress(baseUrl: any, payload: any, task: any): BehaviorSubject<any>;
 }

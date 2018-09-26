@@ -21,14 +21,14 @@ export class CitiesService extends BaseService {
     }
 
     // getCategories function: obtain information of categories in Botica store
-    getCities(applicationId) {
+    getCities(baseUrl, applicationId) {
 
         this.cities = [];
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
-        this.getBase('application/'+applicationId+'/cities/active/', null)
+        this.getBase(baseUrl , 'application/'+applicationId+'/cities/active/', null)
             .subscribe(cities => {
                 for (var cit of <CityModel[]>cities) {
                     var city: CityModel = new CityModel(cit);

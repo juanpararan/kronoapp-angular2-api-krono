@@ -26,11 +26,11 @@ export var ProductsService = (function (_super) {
         this.searching = false;
     }
     // getStoreProducts function: obtain information of products from specific subcategory in Botica store
-    ProductsService.prototype.getProducts = function (chainId, storeId, categId, subcategId, ini, fin) {
+    ProductsService.prototype.getProducts = function (baseUrl, chainId, storeId, categId, subcategId, ini, fin) {
         var _this = this;
         this.products = [];
         var observer = new BehaviorSubject(null);
-        this.getBase('chain/' + chainId + '/store/' + storeId + '/category/'
+        this.getBase(baseUrl, 'chain/' + chainId + '/store/' + storeId + '/category/'
             + categId + '/subcategory/' + subcategId + '/products/active/'
             + ini + '/' + fin + '/', null)
             .subscribe(function (products) {
@@ -47,11 +47,11 @@ export var ProductsService = (function (_super) {
     };
     // getProductsPerTag function: obtain information of products from specific subcategory and tag
     //                             in Botica store
-    ProductsService.prototype.getProductsPerTag = function (chainId, storeId, categId, subcategId, tagId, ini, fin) {
+    ProductsService.prototype.getProductsPerTag = function (baseUrl, chainId, storeId, categId, subcategId, tagId, ini, fin) {
         var _this = this;
         this.productsTags = [];
         var observer = new BehaviorSubject(null);
-        this.getBase('chain/' + chainId + '/store/' + storeId + '/category/'
+        this.getBase(baseUrl, 'chain/' + chainId + '/store/' + storeId + '/category/'
             + categId + '/subcategory/' + subcategId + '/tag/' + tagId +
             '/products/active/' + ini + '/' + fin + '/', null)
             .subscribe(function (products) {
@@ -67,9 +67,9 @@ export var ProductsService = (function (_super) {
         return observer;
     };
     // getStoreProduct function: obtain information of product in Botica store
-    ProductsService.prototype.getProduct = function (chainId, storeId, productId) {
+    ProductsService.prototype.getProduct = function (baseUrl, chainId, storeId, productId) {
         var observer = new BehaviorSubject(null);
-        this.getBase('chain/' + chainId + '/store/' + storeId + '/product/' + productId + '/', null)
+        this.getBase(baseUrl, 'chain/' + chainId + '/store/' + storeId + '/product/' + productId + '/', null)
             .subscribe(function (product) {
             var productStore = new ProductModel(product);
             observer.next(productStore);
@@ -79,14 +79,14 @@ export var ProductsService = (function (_super) {
         return observer;
     };
     // getProductsSought function: obtain products with search in backend
-    ProductsService.prototype.getProductsSought = function (chainId, storeId, text, ini, fin) {
+    ProductsService.prototype.getProductsSought = function (baseUrl, chainId, storeId, text, ini, fin) {
         var _this = this;
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
         if (text.length > 3) {
             this.searching = true;
             this.productsSought = [];
-            this.getBase('chain/' + chainId + '/store/' + storeId +
+            this.getBase(baseUrl, 'chain/' + chainId + '/store/' + storeId +
                 '/products/active/' + ini + '/' + fin + '/' + encodeURI(text) + '/', null)
                 .subscribe(function (products) {
                 _this.searching = false;

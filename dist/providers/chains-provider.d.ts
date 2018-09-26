@@ -10,5 +10,5 @@ export declare class ChainsService extends BaseService {
     chains: ChainModel[];
     chainsStorage: {};
     constructor(http: Http, localStorage: LocalStorageService);
-    getChains(applicationId: any, cityId: any): BehaviorSubject<any>;
+    getChains(baseUrl: any, applicationId: any, cityId: any): BehaviorSubject<any>;
 }

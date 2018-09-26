@@ -13,9 +13,9 @@ export declare class ProductsService extends BaseService {
     productsTags: ProductModel[];
     searching: boolean;
     constructor(http: Http, localStorage: LocalStorageService);
-    getProducts(chainId: any, storeId: any, categId: any, subcategId: any, ini: any, fin: any): BehaviorSubject<any>;
-    getProductsPerTag(chainId: any, storeId: any, categId: any, subcategId: any, tagId: any, ini: any, fin: any): BehaviorSubject<any>;
-    getProduct(chainId: any, storeId: any, productId: any): BehaviorSubject<any>;
-    getProductsSought(chainId: any, storeId: any, text: any, ini: any, fin: any): BehaviorSubject<any>;
+    getProducts(baseUrl: any, chainId: any, storeId: any, categId: any, subcategId: any, ini: any, fin: any): BehaviorSubject<any>;
+    getProductsPerTag(baseUrl: any, chainId: any, storeId: any, categId: any, subcategId: any, tagId: any, ini: any, fin: any): BehaviorSubject<any>;
+    getProduct(baseUrl: any, chainId: any, storeId: any, productId: any): BehaviorSubject<any>;
+    getProductsSought(baseUrl: any, chainId: any, storeId: any, text: any, ini: any, fin: any): BehaviorSubject<any>;
     filterProducts(products: any, searchText: any): any;
 }

@@ -17,13 +17,13 @@ export class LoginService extends BaseService {
     }
 
     // postLoginBotica function: post email and password to authenticate
-    postLoginBotica(payload) {
+    postLoginBotica(baseUrl, payload) {
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
         console.log("PAYLOAD USER LOGIN", payload);
-        this.saveBase('api-token-auth-client/', payload, this.headerLogin())
+        this.saveBase(baseUrl , 'api-token-auth-client/', payload, this.headerLogin())
             .subscribe(data => {
                 observer.next(data);
             }, error => {
@@ -33,9 +33,9 @@ export class LoginService extends BaseService {
     }
 
     // authFacebook void: post user to login in facebook with the backend
-    authFacebook(payload, observer) {
+    authFacebook(baseUrl, payload, observer) {
 
-        this.saveBase('api-token-auth-client-facebook/', payload, this.headerLogin())
+        this.saveBase(baseUrl , 'api-token-auth-client-facebook/', payload, this.headerLogin())
             .subscribe(data => {
                 this.localStorage.set('facebook', true);
                 observer.next(data);
@@ -45,9 +45,9 @@ export class LoginService extends BaseService {
     }
 
     // authGoogle void: post user to login in google with the backend
-    authGoogle(payload, observer) {
+    authGoogle(baseUrl, payload, observer) {
 
-        this.saveBase('api-token-auth-client-google/', payload, this.headerLogin())
+        this.saveBase(baseUrl , 'api-token-auth-client-google/', payload, this.headerLogin())
             .subscribe(data => {
                 this.localStorage.set('google', true);
                 observer.next(data);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
@@ -57,12 +57,12 @@ export class LoginService extends BaseService {
     }
 
     // postLoginAfterRegisterGoogle function: after register user, login with google
-    postloginAfterRegisterGoogle(payload) {
+    postloginAfterRegisterGoogle(baseUrl, payload) {
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
-        this.saveBase('api-token-auth-client-google/', payload, this.headerLogin())
+        this.saveBase(baseUrl , 'api-token-auth-client-google/', payload, this.headerLogin())
             .subscribe(data => {
                 observer.next(data);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
             }, error => {
@@ -73,12 +73,12 @@ export class LoginService extends BaseService {
     }
 
     // postLoginAfterRegisterFacebook function: after register user, login with facebook
-    postLoginAfterRegisterFacebook(payload) {
+    postLoginAfterRegisterFacebook(baseUrl ,payload) {
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
-        this.saveBase('api-token-auth-client-facebook/', payload, this.headerLogin())
+        this.saveBase(baseUrl, 'api-token-auth-client-facebook/', payload, this.headerLogin())
             .subscribe(data => {
                 observer.next(data);
             }, error => {
@@ -90,12 +90,12 @@ export class LoginService extends BaseService {
 
     // forgotPassword function: user forgot password and send to backend
     //                          to verify and send e-mail to recover password
-    forgotPassword(payload) {
+    forgotPassword(baseUrl, payload) {
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
-        this.saveBase('changepassword/user/application/', payload, this.headerLogin())
+        this.saveBase(baseUrl, 'changepassword/user/application/', payload, this.headerLogin())
             .subscribe(data => {
                 observer.next(data);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
             }, error => {

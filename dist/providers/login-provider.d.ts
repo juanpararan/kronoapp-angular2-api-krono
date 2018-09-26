@@ -7,10 +7,10 @@ export declare class LoginService extends BaseService {
     http: Http;
     localStorage: LocalStorageService;
     constructor(http: Http, localStorage: LocalStorageService);
-    postLoginBotica(payload: any): BehaviorSubject<any>;
-    authFacebook(payload: any, observer: any): void;
-    authGoogle(payload: any, observer: any): void;
-    postloginAfterRegisterGoogle(payload: any): BehaviorSubject<any>;
-    postLoginAfterRegisterFacebook(payload: any): BehaviorSubject<any>;
-    forgotPassword(payload: any): BehaviorSubject<any>;
+    postLoginBotica(baseUrl: any, payload: any): BehaviorSubject<any>;
+    authFacebook(baseUrl: any, payload: any, observer: any): void;
+    authGoogle(baseUrl: any, payload: any, observer: any): void;
+    postloginAfterRegisterGoogle(baseUrl: any, payload: any): BehaviorSubject<any>;
+    postLoginAfterRegisterFacebook(baseUrl: any, payload: any): BehaviorSubject<any>;
+    forgotPassword(baseUrl: any, payload: any): BehaviorSubject<any>;
 }

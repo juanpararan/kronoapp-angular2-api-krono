@@ -20,12 +20,12 @@ export var CouponsService = (function (_super) {
         this.coupons = [];
     }
     // getCoupons function: get coupons of specific client in Botica Junín
-    CouponsService.prototype.getCoupons = function (chainId, storeId) {
+    CouponsService.prototype.getCoupons = function (baseUrl, chainId, storeId) {
         var _this = this;
         this.coupons = [];
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.getBase('chain/' + chainId + '/store/' + storeId +
+        this.getBase(baseUrl, 'chain/' + chainId + '/store/' + storeId +
             '/coupons/active/', null)
             .subscribe(function (coupons) {
             for (var _i = 0, _a = coupons; _i < _a.length; _i++) {
@@ -40,10 +40,10 @@ export var CouponsService = (function (_super) {
         return observer;
     };
     // getCoupon function: get specific coupon from specific client in Botica Junín
-    CouponsService.prototype.getCoupon = function (chainId, storeId, couponId) {
+    CouponsService.prototype.getCoupon = function (baseUrl, chainId, storeId, couponId) {
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.getBase('chain/' + chainId + '/store/' + storeId +
+        this.getBase(baseUrl, 'chain/' + chainId + '/store/' + storeId +
             '/coupon/' + couponId + '/active/', null)
             .subscribe(function (couponData) {
             for (var _i = 0, _a = couponData['products']; _i < _a.length; _i++) {
@@ -58,10 +58,10 @@ export var CouponsService = (function (_super) {
         return observer;
     };
     // getCouponWithPromCode function: get specific coupon with the promotional code
-    CouponsService.prototype.getCouponWithPromCode = function (applicationId, userId, storeId, code) {
+    CouponsService.prototype.getCouponWithPromCode = function (baseUrl, applicationId, userId, storeId, code) {
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.getBase('application/' + applicationId + '/client/' + userId +
+        this.getBase(baseUrl, 'application/' + applicationId + '/client/' + userId +
             '/store/' + storeId + '/coupon/active/code/' + code + '/', this.headerAuthentication())
             .subscribe(function (couponData) {
             for (var _i = 0, _a = couponData['products']; _i < _a.length; _i++) {
@@ -76,10 +76,10 @@ export var CouponsService = (function (_super) {
         return observer;
     };
     // getVerifyCouponRules function: get if coupon is valid or not 
-    CouponsService.prototype.getVerifyCouponRules = function (applicationId, userId, storeId, couponId) {
+    CouponsService.prototype.getVerifyCouponRules = function (baseUrl, applicationId, userId, storeId, couponId) {
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.getBase('application/' + applicationId + '/client/' + userId +
+        this.getBase(baseUrl, 'application/' + applicationId + '/client/' + userId +
             '/store/' + storeId + '/valid/coupon/' + couponId + '/', this.headerAuthentication())
             .subscribe(function (couponData) {
             observer.next(couponData);

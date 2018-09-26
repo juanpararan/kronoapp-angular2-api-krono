@@ -23,7 +23,7 @@ export class ChainsService extends BaseService {
     }
 
     // getChains function: obtain information of chains 
-    getChains(applicationId, cityId) {
+    getChains(baseUrl, applicationId, cityId) {
 
         this.chains = [];
         this.chainsStorage = {};
@@ -31,7 +31,7 @@ export class ChainsService extends BaseService {
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
-        this.getBase('application/' + applicationId + '/city/' + cityId + '/chains/active/')
+        this.getBase(baseUrl, 'application/' + applicationId + '/city/' + cityId + '/chains/active/')
             .subscribe(chains => {
                     for (var cha of <ChainModel[]>chains) {
                         var chain: ChainModel = new ChainModel(cha);

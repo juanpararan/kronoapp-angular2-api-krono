@@ -20,12 +20,12 @@ export var CitiesService = (function (_super) {
         this.cities = [];
     }
     // getCategories function: obtain information of categories in Botica store
-    CitiesService.prototype.getCities = function (applicationId) {
+    CitiesService.prototype.getCities = function (baseUrl, applicationId) {
         var _this = this;
         this.cities = [];
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
-        this.getBase('application/' + applicationId + '/cities/active/', null)
+        this.getBase(baseUrl, 'application/' + applicationId + '/cities/active/', null)
             .subscribe(function (cities) {
             for (var _i = 0, _a = cities; _i < _a.length; _i++) {
                 var cit = _a[_i];

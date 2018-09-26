@@ -62,9 +62,10 @@ export var BaseService = (function () {
         };
     }
     // getBase function: get information from server with base path url 
-    BaseService.prototype.getBase = function (path2, options) {
+    BaseService.prototype.getBase = function (baseUrl, path2, options) {
         var _this = this;
         if (options === void 0) { options = null; }
+        this.baseurl = baseUrl;
         var d = new Date();
         var actualTime = Math.floor(d.getTime() / 1000);
         var tokenExp = this.localStorage.get('tokenExp');
@@ -75,7 +76,7 @@ export var BaseService = (function () {
             return new Observable(function (observer) {
                 _this.postRefreshToken().subscribe(function (data) {
                     if (data) {
-                        _this.http.get(_this.path + path2, _this.headerAuthentication())
+                        _this.http.get(baseUrl + path2, _this.headerAuthentication())
                             .map(function (res) { return res.json(); })
                             .catch(_this.handleError)
                             .retry(5)
@@ -86,16 +87,17 @@ export var BaseService = (function () {
             });
         }
         else {
-            return this.http.get(this.path + path2, options)
+            return this.http.get(baseUrl + path2, options)
                 .map(function (res) { return res.json(); })
                 .catch(this.handleError)
                 .retry(5);
         }
     };
     // saveBase function: post in server with base path url
-    BaseService.prototype.saveBase = function (path2, payload, options) {
+    BaseService.prototype.saveBase = function (baseUrl, path2, payload, options) {
         var _this = this;
         if (options === void 0) { options = null; }
+        this.baseurl = baseUrl;
         var d = new Date();
         var actualTime = Math.floor(d.getTime() / 1000);
         if ((this.localStorage.get('tokenExp') != null) &&
@@ -105,7 +107,7 @@ export var BaseService = (function () {
             return new Observable(function (observer) {
                 _this.postRefreshToken().subscribe(function (data) {
                     if (data) {
-                        _this.http.post(_this.path + path2, payload, _this.headerAuthentication())
+                        _this.http.post(baseUrl + path2, payload, _this.headerAuthentication())
                             .map(function (res) { return res.json(); })
                             .catch(_this.handleError)
                             .retry(5)
@@ -116,7 +118,7 @@ export var BaseService = (function () {
             });
         }
         else {
-            return this.http.post(this.path + path2, payload, options)
+            return this.http.post(baseUrl + path2, payload, options)
                 .map(function (res) { return res.json(); })
                 .catch(this.handleError)
                 .retry(5);
@@ -131,7 +133,7 @@ export var BaseService = (function () {
         var postToken = {
             'token': this.localStorage.get('tokenUser')
         };
-        this.http.post(this.path + 'api-token-refresh-client/', postToken, null)
+        this.http.post(this.baseurl + 'api-token-refresh-client/', postToken, null)
             .map(function (res) { return res.json(); })
             .catch(this.handleError)
             .subscribe(function (data) {
