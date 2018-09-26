@@ -18,9 +18,9 @@
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fabiocasmar/angular2-api-krono/issues"
+    "url": "https://github.com/Guilleanto/angular2-api-kronoapps/issues"
   },
-  "homepage": "https://github.com/fabiocasmar/angular2-api-krono#readme",
+  "homepage": "https://github.com/Guilleanto/angular2-api-kronoapps#readme",
   "devDependencies": {
     "@angular/common": "2.2.1",
     "@angular/compiler": "2.2.1",
