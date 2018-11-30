@@ -2,8 +2,8 @@
   "name": "angular2-api-krono",
   "version": "0.0.12",
   "description": "A library/plugin for creating reusable module for Angular 2 and Ionic 2",
-  "main": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
+  "main": "./dist/src/index.js",
+  "typings": "./dist/src/index.d.ts",
   "files": "dist",
   "scripts": {
     "ngc": "ngc",
