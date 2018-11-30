@@ -3,7 +3,7 @@ import { tryCatch } from '../../util/tryCatch';
 import { errorObject } from '../../util/errorObject';
 import { Observable } from '../../Observable';
 import { Subscriber } from '../../Subscriber';
-import { map } from '../../operators';
+import { map } from '../../operators/map';
 function getCORSRequest() {
     if (root.XMLHttpRequest) {
         return new root.XMLHttpRequest();
@@ -102,7 +102,7 @@ export class AjaxObservable extends Observable {
         }
         this.request = request;
     }
-    _subscribe(subscriber) {
+    /** @deprecated internal use only */ _subscribe(subscriber) {
         return new AjaxSubscriber(subscriber, this.request);
     }
 }
@@ -233,7 +233,7 @@ export class AjaxSubscriber extends Subscriber {
         }
         switch (contentType) {
             case 'application/x-www-form-urlencoded':
-                return Object.keys(body).map(key => `${encodeURI(key)}=${encodeURI(body[key])}`).join('&');
+                return Object.keys(body).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(body[key])}`).join('&');
             case 'application/json':
                 return JSON.stringify(body);
             default:
@@ -373,12 +373,16 @@ function parseXhrResponse(responseType, xhr) {
                 return xhr.responseType ? xhr.response : JSON.parse(xhr.response || xhr.responseText || 'null');
             }
             else {
+                // HACK(benlesh): TypeScript shennanigans
+                // tslint:disable-next-line:no-any latest TS seems to think xhr is "never" here.
                 return JSON.parse(xhr.responseText || 'null');
             }
         case 'xml':
             return xhr.responseXML;
         case 'text':
         default:
+            // HACK(benlesh): TypeScript shennanigans
+            // tslint:disable-next-line:no-any latest TS seems to think xhr is "never" here.
             return ('response' in xhr) ? xhr.response : xhr.responseText;
     }
 }

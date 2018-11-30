@@ -9,7 +9,7 @@ var tryCatch_1 = require('../../util/tryCatch');
 var errorObject_1 = require('../../util/errorObject');
 var Observable_1 = require('../../Observable');
 var Subscriber_1 = require('../../Subscriber');
-var operators_1 = require('../../operators');
+var map_1 = require('../../operators/map');
 function getCORSRequest() {
     if (root_1.root.XMLHttpRequest) {
         return new root_1.root.XMLHttpRequest();
@@ -72,7 +72,7 @@ function ajaxPatch(url, body, headers) {
 }
 exports.ajaxPatch = ajaxPatch;
 ;
-var mapResponse = operators_1.map(function (x, index) { return x.response; });
+var mapResponse = map_1.map(function (x, index) { return x.response; });
 function ajaxGetJSON(url, headers) {
     return mapResponse(new AjaxObservable({
         method: 'GET',
@@ -116,7 +116,7 @@ var AjaxObservable = (function (_super) {
         }
         this.request = request;
     }
-    AjaxObservable.prototype._subscribe = function (subscriber) {
+    /** @deprecated internal use only */ AjaxObservable.prototype._subscribe = function (subscriber) {
         return new AjaxSubscriber(subscriber, this.request);
     };
     /**
@@ -250,7 +250,7 @@ var AjaxSubscriber = (function (_super) {
         }
         switch (contentType) {
             case 'application/x-www-form-urlencoded':
-                return Object.keys(body).map(function (key) { return (encodeURI(key) + "=" + encodeURI(body[key])); }).join('&');
+                return Object.keys(body).map(function (key) { return (encodeURIComponent(key) + "=" + encodeURIComponent(body[key])); }).join('&');
             case 'application/json':
                 return JSON.stringify(body);
             default:
@@ -397,12 +397,16 @@ function parseXhrResponse(responseType, xhr) {
                 return xhr.responseType ? xhr.response : JSON.parse(xhr.response || xhr.responseText || 'null');
             }
             else {
+                // HACK(benlesh): TypeScript shennanigans
+                // tslint:disable-next-line:no-any latest TS seems to think xhr is "never" here.
                 return JSON.parse(xhr.responseText || 'null');
             }
         case 'xml':
             return xhr.responseXML;
         case 'text':
         default:
+            // HACK(benlesh): TypeScript shennanigans
+            // tslint:disable-next-line:no-any latest TS seems to think xhr is "never" here.
             return ('response' in xhr) ? xhr.response : xhr.responseText;
     }
 }

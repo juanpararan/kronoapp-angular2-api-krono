@@ -1,0 +1,1 @@
+{"version":3,"file":"my-component.ngfactory.js","sourceRoot":"","sources":["../../../src/components/my-component.ngfactory.ts","../../../src/components/my-component.ts.MyComponent.html"],"names":[],"mappings":";;;;;;;;;;;6DCAA,4EAAK,KAAA,oDAAuB","sourcesContent":["import * as i0 from '@angular/core';\ni0.ComponentFactory;\n","<div>I'm a special snowflake</div>"]}

@@ -1,0 +1,1 @@
+{"version":3,"file":"products-provider.ngfactory.js","sourceRoot":"","sources":["../../../src/providers/products-provider.ngfactory.ts"],"names":[],"mappings":"","sourcesContent":["import * as i0 from '@angular/core';\ni0.ComponentFactory;\n"]}

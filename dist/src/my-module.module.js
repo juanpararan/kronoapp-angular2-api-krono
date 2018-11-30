@@ -1,0 +1,60 @@
+import { NgModule } from '@angular/core';
+// Components
+import { MyComponent } from './components/my-component';
+// Providers
+import { BaseService } from './providers/base-provider';
+import { CategoriesService } from './providers/categories-provider';
+import { SubcategoriesService } from './providers/subcategories-provider';
+import { StoreService } from './providers/store-provider';
+import { TagsService } from './providers/tags-provider';
+import { CouponsService } from './providers/coupons-provider';
+import { ProductsService } from './providers/products-provider';
+import { UsersService } from './providers/users-provider';
+import { OrdersService } from './providers/orders-provider';
+import { ListsService } from './providers/lists-provider';
+import { LoginService } from './providers/login-provider';
+import { BasketService } from './providers/basket-provider';
+import { ChainsService } from './providers/chains-provider';
+import { CitiesService } from './providers/cities-provider';
+import { FeedbackService } from './providers/feedback-provider';
+var MyModule = (function () {
+    function MyModule() {
+    }
+    MyModule.forRoot = function () {
+        return {
+            ngModule: MyModule,
+            providers: [
+                BaseService,
+                CategoriesService,
+                SubcategoriesService,
+                TagsService,
+                StoreService,
+                CouponsService,
+                ProductsService,
+                UsersService,
+                OrdersService,
+                ListsService,
+                LoginService,
+                BasketService,
+                ChainsService,
+                CitiesService,
+                FeedbackService
+            ]
+        };
+    };
+    MyModule.decorators = [
+        { type: NgModule, args: [{
+                    declarations: [
+                        MyComponent
+                    ],
+                    exports: [
+                        MyComponent
+                    ]
+                },] },
+    ];
+    /** @nocollapse */
+    MyModule.ctorParameters = function () { return []; };
+    return MyModule;
+}());
+export { MyModule };
+//# sourceMappingURL=my-module.module.js.map
